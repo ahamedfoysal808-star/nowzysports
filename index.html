@@ -2,6 +2,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VTNHF7TQMV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VTNHF7TQMV');
+</script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FIFA FHD by Sportsplay</title>
@@ -10,10 +21,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://vjs.zencdn.net">
     <link rel="preconnect" href="https://cdn.fluidplayer.com">
-    <link rel="preconnect" href="https://www.googletagmanager.com">
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VTNHF7TQMV"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VTNHF7TQMV');</script>
+    <link rel="dns-prefetch" href="https://vjs.zencdn.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet">
@@ -43,196 +52,117 @@
             overflow: hidden;
             letter-spacing: 0.3px;
         }
-        .marquee-wrapper {
-            flex: 1; overflow: hidden; white-space: nowrap; position: relative;
-        }
-        .marquee-text {
-            display: inline-block; padding-left: 100%; animation: marquee-scroll 18s linear infinite;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-        @keyframes marquee-scroll {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-100%, 0); }
-        }
-        .sticky-notice .close-btn {
-            position: absolute; right: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: #fff;
-            font-size: 16px; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; display: flex; align-items: center;
-            justify-content: center; transition: all 0.3s ease; padding: 0; line-height: 1; z-index: 2;
-        }
-        .sticky-notice .close-btn:hover { background: rgba(255,42,42,0.8); border-color: #ff2a2a; transform: scale(1.1); }
+        .marquee-wrapper { flex: 1; overflow: hidden; white-space: nowrap; position: relative; }
+        .marquee-text { display: inline-block; padding-left: 100%; animation: marquee-scroll 18s linear infinite; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        @keyframes marquee-scroll { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+        
+        .sticky-notice .close-btn { position: absolute; right: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: #fff; font-size: 16px; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; padding: 0; z-index: 2; }
+        .sticky-notice .close-btn:hover { background: rgba(255,42,42,0.8); border-color: #ff2a2a; }
         
         /* Video.js & Fluid Player - Liquid Glass Control Bar styling */
         .video-js .vjs-control-bar, .fluid_controls_container {
-            background: rgba(255, 255, 255, 0.08) !important;
-            backdrop-filter: blur(25px) saturate(200%);
-            -webkit-backdrop-filter: blur(25px) saturate(200%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 40px !important;
-            bottom: 30px !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            width: calc(100% - 60px) !important;
-            max-width: 850px !important;
-            height: 56px !important;
-            display: flex !important;
-            align-items: center !important;
-            padding: 0 15px !important;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
-            transition: opacity .4s ease, transform .4s ease;
+            background: rgba(255, 255, 255, 0.08) !important; backdrop-filter: blur(25px) saturate(200%); -webkit-backdrop-filter: blur(25px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 40px !important; bottom: 30px !important; left: 50% !important; transform: translateX(-50%) !important; width: calc(100% - 60px) !important; max-width: 850px !important; height: 56px !important; display: flex !important; align-items: center !important; padding: 0 15px !important; box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.15); transition: opacity .4s ease, transform .4s ease;
         }
-        /* Fluid player specfics to match layout */
         .fluid_controls_container { padding: 0 10px; display: block !important; }
-        
         .video-js .vjs-button { width: 40px !important; height: 40px !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 50% !important; margin: 0 3px !important; transition: all .2s ease; background: 0 0 !important; }
         .video-js .vjs-button:hover { background: rgba(255, 255, 255, 0.15) !important; }
         .video-js .vjs-icon-placeholder:before { font-size: 1.5em !important; line-height: 1 !important; display: flex; align-items: center; justify-content: center; }
-        
         .video-js .vjs-volume-panel { display: flex !important; align-items: center !important; width: auto !important; }
         .video-js .vjs-volume-panel .vjs-volume-control { display: flex !important; align-items: center !important; height: 100% !important; }
         .video-js .vjs-volume-level { background-color: #fff !important; }
-        
-        /* PiP Button Position styling */
         .video-js .vjs-picture-in-picture-control { display: flex !important; }
-        .video-js .vjs-subs-caps-button { display: flex !important; } /* CC Button */
-        
+        .video-js .vjs-subs-caps-button { display: flex !important; }
         .video-js .vjs-live-control, .video-js .vjs-live-display { display: none !important; }
         .vjs-current-time, .vjs-duration, .vjs-remaining-time, .vjs-time-divider { display: none !important; }
-        
-        /* SLEEK PROGRESS BAR - White Glass */
         .video-js .vjs-progress-control { display: flex !important; flex: auto; align-items: center; margin: 0 10px; }
         .video-js .vjs-progress-holder { height: 6px; border-radius: 4px; background: rgba(255,255,255,0.2); }
         .video-js .vjs-play-progress { background-color: rgba(255,255,255,0.9); border-radius: 4px; }
-        .video-js .vjs-play-progress:before { font-size: 14px; top: -4px; color: #fff; text-shadow: 0 0 5px rgba(255,255,255,0.5); }
-        .video-js .vjs-load-progress { background: rgba(255,255,255,0.1) !important; border-radius: 4px; }
-        .video-js .vjs-load-progress div { background: rgba(255,255,255,0.15) !important; border-radius: 4px; }
+        
+        .video-js.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {
+            opacity: 0 !important; visibility: hidden !important; transform: translateX(-50%) translateY(10px) !important; transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease !important; pointer-events: none !important;
+        }
+        .fluid_controls_container { transition: opacity 0.4s ease, visibility 0.4s ease !important; }
 
         /* Global UI Elements */
-        .global-live-indicator-box {
-            position: absolute; left: 50%; transform: translateX(-50%); z-index: 99999;
-            display: flex; align-items: center; gap: 8px; pointer-events: none;
-            background: rgba(255, 255, 255, 0.1); padding: 5px 10px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.15);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            top: 25px; transition: top 0.3s ease;
-        }
-        .social-box {
-            position:absolute; left:30px; z-index:9999; display:flex; flex-direction:column; gap:10px;
-            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); padding: 12px; border-radius: 16px; 
-            border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 10px 30px rgba(0,0,0,.3);
-            top: 30px; transition: top 0.3s ease;
-        }
+        .global-live-indicator-box { position: absolute; left: 50%; transform: translateX(-50%); z-index: 99999; display: flex; align-items: center; gap: 8px; pointer-events: none; background: rgba(255, 255, 255, 0.1); padding: 5px 10px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(15px); box-shadow: 0 4px 15px rgba(0,0,0,0.3); top: 25px; transition: top 0.3s ease; }
+        
+        .social-box { position:absolute; left:30px; z-index:9999; display:flex; flex-direction:column; gap:10px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); padding: 12px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 10px 30px rgba(0,0,0,.3); top: 30px; transition: top 0.3s ease; }
 
-        /* Adjusted positions when Sticky Notice is active */
+        .vip-trigger-box { position:absolute; right:30px; z-index:9999; top:30px; transition: top 0.3s ease;}
+        .btn-vip-float { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color:#000; border:2px solid rgba(255,255,255,0.3); padding:10px 20px; border-radius:30px; font-weight:800; font-size:14px; display:flex; align-items:center; gap:8px; cursor:pointer; box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4); animation: vipPulse 2s infinite; font-family:'Inter', sans-serif;}
+        @keyframes vipPulse { 0% {box-shadow: 0 0 0 0 rgba(255,215,0,0.6);} 70% {box-shadow: 0 0 0 15px rgba(255,215,0,0);} 100% {box-shadow: 0 0 0 0 rgba(255,215,0,0);} }
+        .btn-vip-logout { background: rgba(255,42,42,0.2); color:#ff4d4d; border:1px solid rgba(255,42,42,0.4); padding:10px 20px; border-radius:30px; font-weight:700; cursor:pointer; backdrop-filter: blur(10px); }
+
         body.has-notice .global-live-indicator-box { top: 60px; }
         body.has-notice .social-box { top: 60px; }
+        body.has-notice .vip-trigger-box { top: 60px; }
 
-        /* NEW SERVER BOX STYLE - PERMANENTLY FIXED ABOVE CONTROL BAR */
         .server-box {
             position: absolute; left: 50%; z-index: 9999; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
             background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); padding: 8px 12px; border-radius: 40px; 
             border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 10px 30px rgba(0,0,0,.3);
-            bottom: 95px; /* Permanently moved up */
-            top: auto !important; transform: translateX(-50%); transition: all 0.4s ease;
+            bottom: 95px; top: auto !important; transform: translateX(-50%); transition: all 0.4s ease;
             opacity: 1; visibility: visible;
         }
-        :fullscreen .server-box, :-webkit-full-screen .server-box { 
-            display: none !important; 
-        }
+        :fullscreen .server-box, :-webkit-full-screen .server-box { display: none !important; }
 
-        .global-live-badge {
-            background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 20px;
-            padding: 0 14px; height: 32px; display: flex; align-items: center;
-            font-size: 12px; font-weight: 700; letter-spacing: .5px; color: #fff; text-transform: uppercase;
-        }
-        .global-live-badge::before {
-            content: ''; display: inline-block; width: 8px; height: 8px; background-color: #ff2a2a;
-            border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px rgba(255, 42, 42, 0.8);
-            animation: pulse-dot 1.5s infinite;
-        }
-        .vjs-view-counter{
-            display:flex!important;align-items:center!important;color:#fff!important;font-size:13px!important;
-            font-weight:600!important;background:rgba(255, 255, 255, 0.1); padding:0 12px!important;height:32px!important;
-            border-radius:20px!important;border:1px solid rgba(255, 255, 255, 0.2)!important;
-        }
-        .vjs-view-counter svg{margin-right:6px; color: #4CAF50;}
+        .global-live-badge { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 20px; padding: 0 14px; height: 32px; display: flex; align-items: center; font-size: 12px; font-weight: 700; letter-spacing: .5px; color: #fff; text-transform: uppercase; }
+        .global-live-badge::before { content: ''; display: inline-block; width: 8px; height: 8px; background-color: #ff2a2a; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px rgba(255, 42, 42, 0.8); animation: pulse-dot 1.5s infinite; }
+        
+        .vjs-view-counter { display:flex!important;align-items:center!important;color:#fff!important;font-size:13px!important; font-weight:600!important;background:rgba(255, 255, 255, 0.1); padding:0 12px!important;height:32px!important; border-radius:20px!important;border:1px solid rgba(255, 255, 255, 0.2)!important; }
+        .vjs-view-counter svg { margin-right:6px; color: #4CAF50; }
         @keyframes pulse-dot{0%{transform:scale(.95);box-shadow:0 0 0 0 rgba(255,42,42,.7)}70%{transform:scale(1);box-shadow:0 0 0 6px rgba(255,42,42,0)}100%{transform:scale(.95);box-shadow:0 0 0 0 rgba(255,42,42,0)}}
 
         .social-btn{display:flex;align-items:center;gap:10px;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;color:#fff;text-decoration:none;transition:.3s}
         .btn-fb{background:rgba(24,119,242,.2);border:1px solid rgba(24,119,242,.4);color:#6db0ff}.btn-fb:hover{background:#1877F2;color:#fff}
         .btn-tg{background:rgba(34,158,217,.2);border:1px solid rgba(34,158,217,.4);color:#6fc8ff}.btn-tg:hover{background:#229ED9;color:#fff}
-        .close-social{align-self:flex-end;background:0 0;border:none;color:#aaa;font-size:16px;cursor:pointer;margin:-5px 0;transition:.2s}.close-social:hover{color:#fff}
         
         .server-btn{background:0 0;color:#ccc;padding:8px 16px;border-radius:30px;font-size:13px;font-weight:600;cursor:pointer;transition:all .3s;border:none;position:relative;}
         .server-btn:hover{background:rgba(255,255,255,.1);color:#fff}
-        /* Active Server Button - White Glass */
         .server-btn.active{background:rgba(255,255,255,0.2);color:#fff;box-shadow:0 4px 15px rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.4); font-weight:700}
-        
+                
         .badge-hd::after { content: 'HD'; position: absolute; top: -6px; right: -4px; background: #00d2ff; color: #000; font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
         .badge-4k::after { content: '4K'; position: absolute; top: -6px; right: -4px; background: #FFD700; color: #000; font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 8px; box-shadow: 0 2px 5px rgba(255,215,0,0.5); }
 
-        /* Unlocker Pop-up Glass Design */
-        #content-locker{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);z-index:99999;display:none;align-items:center;justify-content:center}
-        .locker-box{
-            background: rgba(20, 20, 20, 0.4);
-            backdrop-filter: blur(35px) saturate(180%);
-            -webkit-backdrop-filter: blur(35px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 50px 35px; border-radius: 30px; text-align: center;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
-            max-width: 420px; width: 90%; position: relative; overflow: hidden; animation: popIn .6s forwards;
-        }
-        @keyframes popIn{0%{transform:scale(.8) translateY(20px);opacity:0}100%{transform:scale(1) translateY(0);opacity:1}}
-        .lock-icon{background:rgba(255,255,255,0.05);width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 25px;color:#fff;border:1px solid rgba(255,255,255,0.2);animation:iconPulse 2s infinite}
-        @keyframes iconPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}70%{box-shadow:0 0 0 20px rgba(255,255,255,0)}}
-        .locker-box h2{font-size:26px;margin:0 0 12px;color:#fff;font-weight:700;text-shadow: 0 2px 10px rgba(0,0,0,0.3);}
-        .locker-box p{font-size:17px;color:#e0e0e0;margin:0 0 35px;line-height:1.6;font-weight:500}
-        .locker-fb-btn{
-            display:flex;align-items:center;justify-content:center;gap:12px;
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
-            color:#fff;padding:16px 20px;border-radius:16px;font-weight:600;text-decoration:none;width:100%;font-size:18px;cursor:pointer;transition:all .3s ease;font-family:'Hind Siliguri',sans-serif;
-            backdrop-filter: blur(10px);
-        }
-        .locker-fb-btn:hover{background:rgba(255,255,255,0.2);transform:translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2);}
-        .countdown-text{font-size:18px;font-weight:600;color:#4CAF50;display:none;margin-top:25px;background:rgba(76,175,80,.1);padding:14px;border-radius:12px;border:1px solid rgba(76,175,80,.2);backdrop-filter: blur(10px);}
+        #vip-modal { position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);backdrop-filter:blur(15px);z-index:100000;display:none;align-items:center;justify-content:center; }
+        .vip-box { background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(35px); border: 1px solid rgba(255, 215, 0, 0.3); padding: 40px 30px; border-radius: 24px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8); max-width: 400px; width: 90%; position: relative; animation: popIn .4s forwards; font-family:'Hind Siliguri', sans-serif;}
+        @keyframes popIn { 0%{transform:scale(.9) translateY(10px);opacity:0} 100%{transform:scale(1) translateY(0);opacity:1} }
+        .close-vip { position:absolute; right:15px; top:15px; background:0 0; border:none; color:#aaa; font-size:24px; cursor:pointer;}
+        .vip-box h2 { color:#FFD700; margin:0 0 15px; font-size:24px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:10px;}
+        .vip-box p { color:#ddd; font-size:15px; margin-bottom:20px; line-height:1.5;}
+        .btn-donate { display:inline-block; background:rgba(34,158,217,.2); border:1px solid rgba(34,158,217,.5); color:#6fc8ff; padding:12px 25px; border-radius:12px; text-decoration:none; font-weight:700; font-size:16px; margin-bottom:30px; transition:0.3s; width:100%; box-sizing:border-box;}
+        .btn-donate:hover { background:#229ED9; color:#fff; }
         
-        /* ================= MOBILE RESPONSIVE TWEAKS ================= */
+        .pin-section { background:rgba(0,0,0,0.3); padding:20px; border-radius:16px; border:1px solid rgba(255,255,255,0.1); }
+        .pin-input { width:100%; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.2); color:#fff; padding:15px; border-radius:10px; font-size:18px; text-align:center; font-family:monospace; font-weight:bold; box-sizing:border-box; margin-bottom:15px; text-transform:uppercase;}
+        .pin-input:focus { outline:none; border-color:#FFD700; }
+        .btn-submit-pin { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color:#000; border:none; width:100%; padding:14px; border-radius:10px; font-weight:800; font-size:16px; cursor:pointer;}
+
+        #content-locker{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);z-index:99999;display:none;align-items:center;justify-content:center}
+        .locker-box{ background: rgba(20, 20, 20, 0.4); backdrop-filter: blur(35px) saturate(180%); border: 1px solid rgba(255, 255, 255, 0.15); padding: 50px 35px; border-radius: 30px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1); max-width: 420px; width: 90%; }
+        .locker-fb-btn{ display:flex;align-items:center;justify-content:center;gap:12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color:#fff;padding:16px 20px;border-radius:16px;font-weight:600;width:100%;font-size:18px;cursor:pointer;}
+        
+        /* Mobile Responsive Overlap Fix */
         @media (max-width:768px){
             .sticky-notice { font-size: 13px; padding: 10px 40px 10px 10px; }
-            .sticky-notice .close-btn { right: 8px; width: 24px; height: 24px; font-size: 14px; }
+            /* Adjusted Layout */
+            .global-live-indicator-box { left: 10px; top: 15px; transform: none; padding: 4px 8px; }
+            .vip-trigger-box { right: 10px; top: 15px; transform: scale(0.85); transform-origin: top right; }
+            .social-box { left: 10px; top: 70px; transform: scale(0.85); transform-origin: top left; }
             
-            .social-box{padding:10px;transform:scale(.85);transform-origin:top left}
+            body.has-notice .global-live-indicator-box, body.has-notice .vip-trigger-box { top: 50px; }
+            body.has-notice .social-box { top: 105px; }
             
-            /* Responsive UI for added CC and PiP buttons */
             .video-js .vjs-control-bar, .fluid_controls_container {width:96%!important;bottom:15px!important;height:48px!important;padding:0 5px!important}
             .video-js .vjs-button{width:30px!important;height:30px!important;margin:0 2px!important}
-            .video-js .vjs-icon-placeholder:before{font-size:1.3em!important}
-            .video-js .vjs-progress-control { margin: 0 4px !important; }
             
-            .global-live-indicator-box { top: 15px; transform: translateX(-50%) scale(0.9); padding: 4px 8px; }
-            .social-box { top: 15px; left: 10px; }
-            
-            body.has-notice .global-live-indicator-box { top: 55px; }
-            body.has-notice .social-box { top: 55px; }
-
-            .global-live-badge { height: 28px; padding: 0 10px; font-size: 11px; }
-            .vjs-view-counter{padding:0 8px!important;font-size:11px!important;height:28px!important;margin-left:2px!important}
-            .locker-box{padding:40px 25px}.locker-box h2{font-size:22px}.locker-box p{font-size:15px}
-
-            /* Mobile Server Box - Restricted width to enable scroll and prevent screen stretching */
             .server-box { 
-                bottom: 75px !important; 
-                width: calc(100% - 40px); 
-                box-sizing: border-box;
-                flex-direction: row; 
-                flex-wrap: nowrap; 
-                justify-content: flex-start; 
-                overflow-x: auto; 
-                -webkit-overflow-scrolling: touch; 
+                bottom: 75px !important; width: calc(100% - 40px); box-sizing: border-box;
+                flex-direction: row; flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; -webkit-overflow-scrolling: touch; 
             }
             .server-box::-webkit-scrollbar { display: none; }
             .server-btn { white-space: nowrap; margin-top: 5px; }
-            
-            .video-js.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar,
-            .fluid_controls_container { opacity: 1 !important; visibility: visible !important; display: flex !important; transform: translateX(-50%) translateY(0) !important; }
         }
     </style>
 </head>
@@ -240,39 +170,20 @@
 
 <div id="sticky-header-notice" class="sticky-notice">
     <div class="marquee-wrapper">
-        <span class="marquee-text">📢 খেলা শুরু আগে সব সার্ভার লাইভ হয়ে যাবে! 📌 টেলিগ্রাম: t.me/sportsplay</span>
+        <span class="marquee-text">📢 আর্জেন্টিনা খেলা এখন লাইভ রয়েছে! 4K সার্ভার যুক্ত করা হচ্ছে!</span>
     </div>
-    <button class="close-btn" onclick="dismissNotice()" aria-label="Close Notice">&times;</button>
-</div>
-
-<div id="content-locker">
-    <div class="locker-box">
-        <div class="lock-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-        </div>
-        <h2>প্রিমিয়াম স্ট্রিমিং আনলক করুন! 🔐</h2>
-        <p>লাইভ খেলা FHD/4K কোয়ালিটিতে দেখতে বাটনে ক্লিক করে আমাদের ফেইসবুক পেইজ ফলো করুন, ৫ সেকেন্ড অপেক্ষা করুন!</p>
-        <button id="fbLockerBtn" class="locker-fb-btn" onclick="startUnlockProcess()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg>
-            এক্ষুনি অ্যাক্সেস পান!
-        </button>
-        <div id="lockerCountdown" class="countdown-text">লোড হচ্ছে... <span id="countNumber">৫</span> সেকেন্ড</div>
-    </div>
+    <button class="close-btn" onclick="dismissNotice()">&times;</button>
 </div>
 
 <div class="server-box">
-                    <button id="btn-0" class="server-btn badge-hd active" onclick="changeServer('https://prod-cdn01-live.toffeelive.com/live/FIFA-2026-2/sst/0/master_1500.m3u8?hdntl=Expires=1783113880~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AeQsclCNajRJ9NxFBdy-OAdN-HPxh5utDMaInDxTCfln6opFX_8v4Urq3FFpRuXtLM4hyso0AnS1PzCPPzyvGNsdBh8D', 0)">
+                    <button id="btn-0" class="server-btn badge-hd active" onclick="changeServer('https://prod-cdn01-live.toffeelive.com/live/FIFA-2026-2/sst/0/master_1500.m3u8?hdntl=Expires=1783199917~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AeQsclAQ5xDLzTjmA80E75PXuUmm8zhmvZN9aL2xr9SH-yM6bzE-uvXTWt9HdRuiENLRpmuWTfuTllLjGzWdPBZ53jQP', 0, 'HD')">
             Server 1        </button>
-                    <button id="btn-1" class="server-btn badge-hd " onclick="changeServer('https://flive.pochonderbazarbd.workers.dev/', 1)">
+                    <button id="btn-1" class="server-btn badge-hd " onclick="changeServer('https://live.smtahmidx.workers.dev/', 1, 'HD')">
             Server 2        </button>
-                    <button id="btn-2" class="server-btn badge-hd " onclick="changeServer('https://live.smtahmidx.workers*dev/', 2)">
+                    <button id="btn-2" class="server-btn badge-hd " onclick="changeServer('https://foxfhd2.fifaliveclick2.workers.dev/', 2, 'HD')">
             Server 3        </button>
-                    <button id="btn-3" class="server-btn badge-hd " onclick="changeServer('https://binge.oolcaykarael.workers.dev/', 3)">
+                    <button id="btn-3" class="server-btn badge-4k " onclick="changeServer('https://fussball4k.fifalive4k2.workers.dev/', 3, '4K')">
             Server 4        </button>
-                    <button id="btn-4" class="server-btn badge-4k " onclick="changeServer('https://4k.tahmidxtsn.workers.dev/', 4)">
-            Server 5        </button>
-                    <button id="btn-5" class="server-btn badge-4k " onclick="changeServer('https://live.fox4ktahmidx.workers.dev/', 5)">
-            Server 6        </button>
     </div>
 
 <div class="global-live-indicator-box" id="liveIndicator">
@@ -283,13 +194,13 @@
     </div>
     </div>
 
-<div id="vjs-wrapper">
+<div id="vjs-wrapper" style="display: block;">
     <video id="live-player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted playsinline preload="metadata">
-        <source src="https://prod-cdn01-live.toffeelive.com/live/FIFA-2026-2/sst/0/master_1500.m3u8?hdntl=Expires=1783113880~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AeQsclCNajRJ9NxFBdy-OAdN-HPxh5utDMaInDxTCfln6opFX_8v4Urq3FFpRuXtLM4hyso0AnS1PzCPPzyvGNsdBh8D" type="application/x-mpegURL">
-    </video>
+                <source src="https://prod-cdn01-live.toffeelive.com/live/FIFA-2026-2/sst/0/master_1500.m3u8?hdntl=Expires=1783199917~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AeQsclAQ5xDLzTjmA80E75PXuUmm8zhmvZN9aL2xr9SH-yM6bzE-uvXTWt9HdRuiENLRpmuWTfuTllLjGzWdPBZ53jQP" type="application/x-mpegURL">
+            </video>
 </div>
 
-<div id="fluid-wrapper">
+<div id="fluid-wrapper" style="display: none;">
     <video id="fluid-player" controls autoplay muted playsinline></video>
 </div>
 
@@ -298,6 +209,32 @@
 <script defer src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
 
 <script defer>
+    function openVipModal() { document.getElementById('vip-modal').style.display = 'flex'; }
+    function closeVipModal() { document.getElementById('vip-modal').style.display = 'none'; }
+    
+    function submitVipPin() {
+        let pin = document.getElementById('vipPinInput').value.trim();
+        if(pin === "") return alert("Please enter PIN");
+        document.getElementById('vipSubmitBtn').innerText = "VERIFYING...";
+        
+        fetch('', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: 'action=vip_login&pin=' + encodeURIComponent(pin)
+        }).then(r => r.json()).then(res => {
+            if(res.success) { location.reload(); } 
+            else { alert(res.msg); document.getElementById('vipSubmitBtn').innerText = "UNLOCK VIP NOW"; }
+        }).catch(()=> { alert("Network Error!"); document.getElementById('vipSubmitBtn').innerText = "UNLOCK VIP NOW"; });
+    }
+
+    function logoutVip() {
+        if(confirm("Are you sure you want to log out of VIP?")) {
+            fetch('', {
+                method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: 'action=vip_logout'
+            }).then(() => location.reload());
+        }
+    }
+
     function dismissNotice() {
         var notice = document.getElementById('sticky-header-notice');
         if (notice) notice.style.display = 'none';
@@ -306,45 +243,32 @@
 
     const isLockerEnabled = false;
     const isCounterEnabled = true;
-    const baseViewsAmount = 3300;
+    const baseViewsAmount = 9300;
 
     const isTV = /SmartTV|Tizen|WebOS|BRAVIA|Android TV|AppleTV|Roku|TV/i.test(navigator.userAgent);
-    if (isTV) {
-        localStorage.setItem('isPremiumUnlocked', 'true');
-    }
-
-    const nukePage=()=>{document.body.innerHTML='',document.body.style.backgroundColor='black',document.head.innerHTML=''};
-    document.addEventListener('contextmenu',e=>e.preventDefault());
-    document.addEventListener('keydown',e=>{if(123===e.keyCode||(e.ctrlKey&&e.shiftKey&&(73===e.keyCode||74===e.keyCode||67===e.keyCode))||(e.ctrlKey&&85===e.keyCode))e.preventDefault(),nukePage()});
-    setInterval(()=>{const e=performance.now();debugger;performance.now()-e>100&&nukePage()},500);
-    window.addEventListener('resize',()=>{const e=window.outerWidth-window.innerWidth,n=window.outerHeight-window.innerHeight;(e>160||n>160)&&nukePage()});
-    const devtoolsDetector=new Image;Object.defineProperty(devtoolsDetector,'id',{get:function(){nukePage()}});console.log('%c',devtoolsDetector);
+    if (isTV) { localStorage.setItem('isPremiumUnlocked', 'true'); }
 
     function startUnlockProcess(){
-        window.open('https://facebook.com/tahmidx.tech2','_blank'),document.getElementById('fbLockerBtn').style.display='none';
+        window.open('https://facebook.com/tahmidx.tech2','_blank');
+        document.getElementById('fbLockerBtn').style.display='none';
         let e=document.getElementById('lockerCountdown');e.style.display='block';
         let n=5,t=['০','১','২','৩','৪','৫'];
         document.getElementById('countNumber').innerText=t[n];
-        let o=setInterval((function(){document.hidden||!document.hasFocus()?(n--,n>=0&&(e.innerHTML=`লোড হচ্ছে... <span id="countNumber">${t[n]}</span> সেকেন্ড`),n<=0&&(clearInterval(o),localStorage.setItem('isPremiumUnlocked','true'),location.reload())):e.innerHTML=`ভেরিফিকেশন থেমে গেছে, ফেসবুকে ফেরত যান... <span id="countNumber">${t[n]}</span>`}),1e3)
+        let o=setInterval((function(){document.hidden||!document.hasFocus()?(n--,n>=0&&(e.innerHTML=`চেক করা হচ্ছে... <span id="countNumber">${t[n]}</span> সেকেন্ড`),n<=0&&(clearInterval(o),localStorage.setItem('isPremiumUnlocked','true'),location.reload())):e.innerHTML=`আগে পেজ ফলো করুন, তারপর আবার ব্যাক আসুন...  <span id="countNumber">${t[n]}</span>`}),1e3)
     }
 
     var hlsFluid = null;
     var fluidPlayerInstance = null;
+    var player = null;
 
     function initFluidPlayer(url) {
-        if(!fluidPlayerInstance) {
+        if(!fluidPlayerInstance && typeof fluidPlayer !== 'undefined') {
             fluidPlayerInstance = fluidPlayer('fluid-player', {
-                layoutControls: { 
-                    fillToContainer: true, 
-                    primaryColor: "#ffffff", 
-                    autoPlay: true, 
-                    mute: true, 
-                    controlBar: { autoHide: true } 
-                }
+                layoutControls: { fillToContainer: true, primaryColor: "#ffffff", autoPlay: true, mute: true, controlBar: { autoHide: true } }
             });
         }
         var videoEl = document.getElementById('fluid-player');
-        if (Hls.isSupported()) {
+        if (typeof Hls !== 'undefined' && Hls.isSupported()) {
             if(hlsFluid) hlsFluid.destroy();
             hlsFluid = new Hls({maxBufferLength: 30});
             hlsFluid.loadSource(url);
@@ -358,106 +282,132 @@
         }
     }
 
-    window.addEventListener('load', function() {
-        var serverList=["https:\/\/prod-cdn01-live.toffeelive.com\/live\/FIFA-2026-2\/sst\/0\/master_1500.m3u8?hdntl=Expires=1783113880~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AeQsclCNajRJ9NxFBdy-OAdN-HPxh5utDMaInDxTCfln6opFX_8v4Urq3FFpRuXtLM4hyso0AnS1PzCPPzyvGNsdBh8D","https:\/\/flive.pochonderbazarbd.workers.dev\/","https:\/\/live.smtahmidx.workers*dev\/","https:\/\/binge.oolcaykarael.workers.dev\/","https:\/\/4k.tahmidxtsn.workers.dev\/","https:\/\/live.fox4ktahmidx.workers.dev\/"];
-        var currentServerIndex=0, isSwitching=!1;
-        
-        // ==========================================
-        // Video.js Initialization with CC and PiP
-        // ==========================================
-        var player = videojs('live-player', {
-            html5: { vhs: { overrideNative: !0, allowCrossfileNaming: !0 } },
-            muted: !0,
-            controlBar: {
-                children: [
-                    'playToggle',
-                    'volumePanel',
-                    'subsCapsButton', 
-                    'pictureInPictureToggle', 
-                    'progressControl',
-                    'fullscreenToggle'
-                ]
+    // Changed to DOMContentLoaded for instant loading
+    document.addEventListener('DOMContentLoaded', function() {
+        var serverList = ["https:\/\/prod-cdn01-live.toffeelive.com\/live\/FIFA-2026-2\/sst\/0\/master_1500.m3u8?hdntl=Expires=1783199917~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AeQsclAQ5xDLzTjmA80E75PXuUmm8zhmvZN9aL2xr9SH-yM6bzE-uvXTWt9HdRuiENLRpmuWTfuTllLjGzWdPBZ53jQP","https:\/\/live.smtahmidx.workers.dev\/","https:\/\/foxfhd2.fifaliveclick2.workers.dev\/","https:\/\/fussball4k.fifalive4k2.workers.dev\/"];
+        var qualityList = ["HD","HD","HD","4K"];
+        var currentServerIndex = 0, isSwitching = !1;
+        var defaultQuality = 'HD';
+        var defaultStream = 'https://prod-cdn01-live.toffeelive.com/live/FIFA-2026-2/sst/0/master_1500.m3u8?hdntl=Expires=1783199917~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AeQsclAQ5xDLzTjmA80E75PXuUmm8zhmvZN9aL2xr9SH-yM6bzE-uvXTWt9HdRuiENLRpmuWTfuTllLjGzWdPBZ53jQP';
+
+        // Wait slightly for videojs if it hasn't loaded yet via defer
+        var initPlayers = function() {
+            if(typeof videojs === 'undefined') {
+                setTimeout(initPlayers, 50);
+                return;
             }
-        });
-        
-        player.ready(function(){
-            if (!isLockerEnabled || localStorage.getItem('isPremiumUnlocked')) {
-                var lockerEl = document.getElementById('content-locker');
-                if(lockerEl) lockerEl.style.display='none';
-                player.muted(!0);
-                player.play();
-            } else {
-                var lockerEl = document.getElementById('content-locker');
-                if(lockerEl) lockerEl.style.display='flex';
-                player.pause();
-            }
-            
-            if (isCounterEnabled) {
-                let n = baseViewsAmount + Math.floor(500 * Math.random());
-                const t = document.getElementById('liveViewerCount');
-                function o() {
-                    n += Math.floor(300 * Math.random()) - 80;
-                    if(t) t.innerText = n >= 1e3 ? (n / 1e3).toFixed(1) + "K" : n.toString();
-                    setTimeout(o, 3e3 + 4e3 * Math.random());
+
+            player = videojs('live-player', {
+                html5: { vhs: { overrideNative: !0, allowCrossfileNaming: !0 } },
+                muted: !0,
+                controlBar: {
+                    children: ['playToggle', 'volumePanel', 'subsCapsButton', 'pictureInPictureToggle', 'progressControl', 'fullscreenToggle']
                 }
-                o();
-            }
-        });
-
-        window.changeServer=function(e,n){
-            if(0===n&&0!==currentServerIndex)return void window.location.reload();
-            if(n === currentServerIndex) return;
+            });
             
-            currentServerIndex=n, isSwitching=!1;
-            document.querySelectorAll('.server-btn').forEach(btn=>btn.classList.remove('active'));
-            var t=document.getElementById('btn-'+n);
-            if(t) t.classList.add('active');
+            player.ready(function(){
+                if (!isLockerEnabled || localStorage.getItem('isPremiumUnlocked')) {
+                    var lockerEl = document.getElementById('content-locker');
+                    if(lockerEl) lockerEl.style.display='none';
+                    if (defaultQuality === 'HD') { player.muted(!0); player.play(); }
+                } else {
+                    var lockerEl = document.getElementById('content-locker');
+                    if(lockerEl) lockerEl.style.display='flex';
+                    player.pause();
+                }
+                
+                if (isCounterEnabled) {
+                    let n = baseViewsAmount + Math.floor(500 * Math.random());
+                    const t = document.getElementById('liveViewerCount');
+                    function o() {
+                        n += Math.floor(300 * Math.random()) - 80;
+                        if(t) t.innerText = n >= 1e3 ? (n / 1e3).toFixed(1) + "K" : n.toString();
+                        setTimeout(o, 3e3 + 4e3 * Math.random());
+                    }
+                    o();
+                }
+            });
 
-            if (n < 4) {
-                document.getElementById('fluid-wrapper').style.display = 'none';
-                document.getElementById('vjs-wrapper').style.display = 'block';
-                var fplayer = document.getElementById('fluid-player');
-                if(fplayer && fplayer.pause) fplayer.pause();
+            // Auto-init 4K if default is 4K
+            if (defaultQuality === '4K') {
+                setTimeout(function(){ initFluidPlayer(defaultStream); }, 100);
+            }
+
+            // New Server Switch Logic based on Quality Field
+            window.changeServer = function(e, n, quality) {
+                if(0 === n && 0 !== currentServerIndex) return void window.location.reload();
+                if(n === currentServerIndex) return;
                 
-                player.error(null);
-                player.pause();
-                player.src({src:e,type:'application/x-mpegURL'});
-                player.load();
-                player.play().then(function(){isSwitching=!1}).catch(function(e){console.log("Autoplay failed:",e);setTimeout(function(){isSwitching=!1},2500)});
-            } else {
-                document.getElementById('vjs-wrapper').style.display = 'none';
-                document.getElementById('fluid-wrapper').style.display = 'block';
-                player.pause();
-                
-                initFluidPlayer(e);
+                currentServerIndex = n;
                 isSwitching = !1;
-            }
+                document.querySelectorAll('.server-btn').forEach(btn => btn.classList.remove('active'));
+                var t = document.getElementById('btn-'+n);
+                if(t) t.classList.add('active');
+
+                // HD -> Video.js | 4K -> Fluid Player
+                if (quality === 'HD') {
+                    document.getElementById('fluid-wrapper').style.display = 'none';
+                    document.getElementById('vjs-wrapper').style.display = 'block';
+                    var fplayer = document.getElementById('fluid-player');
+                    if(fplayer && fplayer.pause) fplayer.pause();
+                    
+                    player.error(null);
+                    player.pause();
+                    player.src({src:e, type:'application/x-mpegURL'});
+                    player.load();
+                    player.play().then(function(){isSwitching=!1}).catch(function(err){console.log("Autoplay failed:",err);setTimeout(function(){isSwitching=!1},2500)});
+                } else {
+                    document.getElementById('vjs-wrapper').style.display = 'none';
+                    document.getElementById('fluid-wrapper').style.display = 'block';
+                    if(player) player.pause();
+                    
+                    initFluidPlayer(e);
+                    isSwitching = !1;
+                }
+            };
+
+            player.on('error',function(){
+                if(isSwitching) return;
+                var e = currentServerIndex + 1;
+                if(e < serverList.length) {
+                    isSwitching = !0;
+                    setTimeout(function(){ changeServer(serverList[e], e, qualityList[e]) }, 3e3);
+                }
+            });
         };
-
-        player.on('error',function(){
-            if(isSwitching)return;
-            var e=currentServerIndex+1;
-            e<serverList.length&&(isSwitching=!0,setTimeout(function(){changeServer(serverList[e],e)},3e3))
-        });
-
-        // ==========================================
-        // Fullscreen Logic
-        // ==========================================
-        const srvBox = document.querySelector('.server-box');
-
-        document.addEventListener('fullscreenchange', () => {
-            if(document.fullscreenElement) {
-                if (srvBox) srvBox.style.display = 'none';
-            } else {
-                if (srvBox) srvBox.style.display = 'flex';
-            }
-        });
+        initPlayers();
     });
+
+    function manageScreenOrientation() {
+        var isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+        
+        if (isFullscreen) {
+            try {
+                if (screen.orientation && screen.orientation.lock) { screen.orientation.lock('landscape').catch(function(e) { console.log('Orientation lock error:', e); }); }
+                else if (screen.lockOrientation) { screen.lockOrientation('landscape'); }
+                else if (screen.mozLockOrientation) { screen.mozLockOrientation('landscape'); }
+                else if (screen.msLockOrientation) { screen.msLockOrientation('landscape'); }
+            } catch (err) { console.log('Orientation API not supported on this device.'); }
+        } else {
+            try {
+                if (screen.orientation && screen.orientation.unlock) { screen.orientation.unlock(); }
+                else if (screen.unlockOrientation) { screen.unlockOrientation(); }
+                else if (screen.mozUnlockOrientation) { screen.mozUnlockOrientation(); }
+                else if (screen.msUnlockOrientation) { screen.msUnlockOrientation(); }
+            } catch (err) { console.log('Orientation unlock failed.'); }
+        }
+    }
+
+    document.addEventListener('fullscreenchange', manageScreenOrientation);
+    document.addEventListener('webkitfullscreenchange', manageScreenOrientation);
+    document.addEventListener('mozfullscreenchange', manageScreenOrientation);
+    document.addEventListener('MSFullscreenChange', manageScreenOrientation);
 </script>
 
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"1f7d8a56c34342eeb554f35d27094085","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 
-<script src="https://pl20213750.effectivecpmnetwork.com/95/bd/48/95bd48127f2c916d122b5cae3b2337f4.js"></script>
-<script src="https://pl18985032.effectivecpmnetwork.com/55/f3/06/55f3066ed55833a836f391b663a29b55.js"></script>
+<script async src="https://pl20213750.effectivecpmnetwork.com/95/bd/48/95bd48127f2c916d122b5cae3b2337f4.js"></script>
+<script async src="https://pl18985032.effectivecpmnetwork.com/55/f3/06/55f3066ed55833a836f391b663a29b55.js"></script>
+
 </body>
 </html>
