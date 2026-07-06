@@ -170,7 +170,7 @@
 
 <div id="sticky-header-notice" class="sticky-notice">
     <div class="marquee-wrapper">
-        <span class="marquee-text">📢 আমাদের ম্যাক্সিমাম লাইভ সার্ভার রিপোর্ট করে ডাউন করানো হয়েছে! আমরা ফিক্স করছি...</span>
+        <span class="marquee-text">📢 ফিফা বিশ্বকাপের সকল ম্যাচ দেখতে আমাদের সাই থাকুন। t.me/sportsplaybd ...</span>
     </div>
     <button class="close-btn" onclick="dismissNotice()">&times;</button>
 </div>
@@ -185,7 +185,7 @@
 </div>
 
 <div class="server-box">
-                    <button id="btn-0" class="server-btn badge-hd active" onclick="changeServer('https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1500.m3u8?hdntl=Expires=1783352720~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AeQsclBUUq9wTD-jaDHZTdKJmwjYa0sbQ187VZq_j3clvSFjAFcIaP__EUU1mh9pTuCtJP-SG9fE4lHfmY1rV4IgD9MD', 0, 'HD')">
+                    <button id="btn-0" class="server-btn badge-hd active" onclick="changeServer('https://flussonic.deltainfonet.com/01_Tsports_HD/tracks-v1a1/mono.m3u8', 0, 'HD')">
             Server 1        </button>
                     <button id="btn-1" class="server-btn badge-hd " onclick="changeServer('https://cdn.fifalive.click/play.m3u8', 1, 'HD')">
             Server 2        </button>
@@ -203,7 +203,7 @@
 
 <div id="vjs-wrapper" style="display: block;">
     <video id="live-player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted playsinline preload="metadata">
-                <source src="https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1500.m3u8?hdntl=Expires=1783352720~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AeQsclBUUq9wTD-jaDHZTdKJmwjYa0sbQ187VZq_j3clvSFjAFcIaP__EUU1mh9pTuCtJP-SG9fE4lHfmY1rV4IgD9MD" type="application/x-mpegURL">
+                <source src="https://flussonic.deltainfonet.com/01_Tsports_HD/tracks-v1a1/mono.m3u8" type="application/x-mpegURL">
             </video>
 </div>
 
@@ -295,7 +295,7 @@
         var qualityList = ["HD","HD","HD"];
         var currentServerIndex = 0, isSwitching = !1;
         var defaultQuality = 'HD';
-        var defaultStream = 'https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1500.m3u8?hdntl=Expires=1783352720~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AeQsclBUUq9wTD-jaDHZTdKJmwjYa0sbQ187VZq_j3clvSFjAFcIaP__EUU1mh9pTuCtJP-SG9fE4lHfmY1rV4IgD9MD';
+        var defaultStream = 'https://flussonic.deltainfonet.com/01_Tsports_HD/tracks-v1a1/mono.m3u8';
 
         // Wait slightly for videojs if it hasn't loaded yet via defer
         var initPlayers = function() {
