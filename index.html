@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +14,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIFA FHD by Sportsplay</title>
+    <title>FIFA FHD by TahMiDx</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -176,7 +175,6 @@
 </div>
 
 
-</div>
 
 <div id="content-locker">
     <div class="locker-box">
@@ -187,19 +185,15 @@
     </div>
 </div>
 
-<div class="social-box" id="socialWidget">
-    <button style="align-self:flex-end;background:0 0;border:none;color:#aaa;font-size:16px;cursor:pointer;margin:-5px 0" onclick="document.getElementById('socialWidget').style.display='none';">&times;</button>
-    <a href="https://t.me/sportsplaybd" target="_blank" class="social-btn btn-fb">Follow on Facebook</a>
-    <a href="https://t.me/sportsplaybd" target="_blank" class="social-btn btn-tg">Follow on Telegram</a>
-</div>
-
 <div class="server-box">
-                    <button id="btn-0" class="server-btn badge-hd active" onclick="changeServer('https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1500.m3u8?hdntl=Expires=1783450038~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AWIR_5FEL1k8XhKZ-QdEU8KvbgRBeHsZZuSgByWJTM_ZjxBoQmqaMjhFdipZ-6fYNKkoQseE7-EssOkIg9GV9OQdwkgA', 0, 'HD')">
+                    <button id="btn-0" class="server-btn badge-hd active" onclick="changeServer('https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1500.m3u8?hdntl=Expires=1783524306~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AWIR_5EPeRjqC4pdh1IIlHW8W5m24an5C2xrBgsyOrsIHthip2kjh8AhFG_1Sqmq7Cyr_-2MVi4HG70LE1QbZyYUMX4J', 0, 'HD')">
             Server 1        </button>
-                    <button id="btn-1" class="server-btn badge-hd " onclick="changeServer('https://bfiaawagaalygikasqdk.supabase.co/functions/v1/swift-api?url=Q09k4OuzERoki_6lV9SoOjak4MYmokrJdsHJokrJdkABFhNcE0zKLw&headers=3OvT47zfFUg6qMuvdly_ERHndj1A4UgTq5ugF5okFCoRqGu8I5gUFCIRIhNmQCPKIMYjQjvhq7v_qU1OyCT', 1, 'HD')">
+                    <button id="btn-1" class="server-btn badge-hd " onclick="changeServer('https://cdn.fifalive.click/play.m3u8', 1, 'HD')">
             Server 2        </button>
-                    <button id="btn-2" class="server-btn badge-hd " onclick="changeServer('https://m3u8-proxy-v1.jahinalamshamim.workers.dev/proxy?url=https://tv.beyondtaxconsultants.com/api/robi/lps/http://180.94.28.28:8097//BTV/tracks-v1a1/index.m3u8', 2, 'HD')">
+                    <button id="btn-2" class="server-btn badge-hd " onclick="changeServer('https://cdn2.fifalive.click/play.m3u8', 2, 'HD')">
             Server 3        </button>
+                    <button id="btn-3" class="server-btn badge-hd " onclick="changeServer('https://pull.niues.live/live/stream-9912060_lhd.m3u8?auth_key=1783284383-0-0-ba541e77b9330eab42075af6aa5029e4', 3, 'HD')">
+            Server 4        </button>
     </div>
 
 <div class="global-live-indicator-box" id="liveIndicator">
@@ -212,7 +206,7 @@
 
 <div id="vjs-wrapper" style="display: block;">
     <video id="live-player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted playsinline preload="metadata">
-                <source src="https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1500.m3u8?hdntl=Expires=1783450038~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AWIR_5FEL1k8XhKZ-QdEU8KvbgRBeHsZZuSgByWJTM_ZjxBoQmqaMjhFdipZ-6fYNKkoQseE7-EssOkIg9GV9OQdwkgA" type="application/x-mpegURL">
+                <source src="https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1500.m3u8?hdntl=Expires=1783524306~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AWIR_5EPeRjqC4pdh1IIlHW8W5m24an5C2xrBgsyOrsIHthip2kjh8AhFG_1Sqmq7Cyr_-2MVi4HG70LE1QbZyYUMX4J" type="application/x-mpegURL">
             </video>
 </div>
 
@@ -225,32 +219,6 @@
 <script defer src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
 
 <script defer>
-    function openVipModal() { document.getElementById('vip-modal').style.display = 'flex'; }
-    function closeVipModal() { document.getElementById('vip-modal').style.display = 'none'; }
-    
-    function submitVipPin() {
-        let pin = document.getElementById('vipPinInput').value.trim();
-        if(pin === "") return alert("Please enter PIN");
-        document.getElementById('vipSubmitBtn').innerText = "VERIFYING...";
-        
-        fetch('', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: 'action=vip_login&pin=' + encodeURIComponent(pin)
-        }).then(r => r.json()).then(res => {
-            if(res.success) { location.reload(); } 
-            else { alert(res.msg); document.getElementById('vipSubmitBtn').innerText = "UNLOCK VIP NOW"; }
-        }).catch(()=> { alert("Network Error!"); document.getElementById('vipSubmitBtn').innerText = "UNLOCK VIP NOW"; });
-    }
-
-    function logoutVip() {
-        if(confirm("Are you sure you want to log out of VIP?")) {
-            fetch('', {
-                method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: 'action=vip_logout'
-            }).then(() => location.reload());
-        }
-    }
-
     function dismissNotice() {
         var notice = document.getElementById('sticky-header-notice');
         if (notice) notice.style.display = 'none';
@@ -259,13 +227,13 @@
 
     const isLockerEnabled = false;
     const isCounterEnabled = true;
-    const baseViewsAmount = 5661;
+    const baseViewsAmount = 2101;
 
     const isTV = /SmartTV|Tizen|WebOS|BRAVIA|Android TV|AppleTV|Roku|TV/i.test(navigator.userAgent);
     if (isTV) { localStorage.setItem('isPremiumUnlocked', 'true'); }
 
     function startUnlockProcess(){
-        window.open('https://t.me/sportsplaybd','_blank');
+        window.open('https://facebook.com/tahmidx.tech2','_blank');
         document.getElementById('fbLockerBtn').style.display='none';
         let e=document.getElementById('lockerCountdown');e.style.display='block';
         let n=5,t=['০','১','২','৩','৪','৫'];
@@ -300,11 +268,11 @@
 
     // Changed to DOMContentLoaded for instant loading
     document.addEventListener('DOMContentLoaded', function() {
-        var serverList = ["https:\/\/prod-cdn01-live.toffeelive.com\/live\/FIFA-2026\/sst\/0\/master_1500.m3u8?hdntl=Expires=1783450038~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AWIR_5FEL1k8XhKZ-QdEU8KvbgRBeHsZZuSgByWJTM_ZjxBoQmqaMjhFdipZ-6fYNKkoQseE7-EssOkIg9GV9OQdwkgA","https:\/\/cdn.fifalive.click\/play.m3u8","https:\/\/cdn2.fifalive.click\/play.m3u8"];
-        var qualityList = ["HD","HD","HD"];
+        var serverList = ["https:\/\/prod-cdn01-live.toffeelive.com\/live\/FIFA-2026\/sst\/0\/master_1500.m3u8?hdntl=Expires=1783524306~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AWIR_5EPeRjqC4pdh1IIlHW8W5m24an5C2xrBgsyOrsIHthip2kjh8AhFG_1Sqmq7Cyr_-2MVi4HG70LE1QbZyYUMX4J","https:\/\/cdn.fifalive.click\/play.m3u8","https:\/\/cdn2.fifalive.click\/play.m3u8","https:\/\/pull.niues.live\/live\/stream-9912060_lhd.m3u8?auth_key=1783284383-0-0-ba541e77b9330eab42075af6aa5029e4"];
+        var qualityList = ["HD","HD","HD","HD"];
         var currentServerIndex = 0, isSwitching = !1;
         var defaultQuality = 'HD';
-        var defaultStream = 'https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1500.m3u8?hdntl=Expires=1783450038~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AWIR_5FEL1k8XhKZ-QdEU8KvbgRBeHsZZuSgByWJTM_ZjxBoQmqaMjhFdipZ-6fYNKkoQseE7-EssOkIg9GV9OQdwkgA';
+        var defaultStream = 'https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1500.m3u8?hdntl=Expires=1783524306~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AWIR_5EPeRjqC4pdh1IIlHW8W5m24an5C2xrBgsyOrsIHthip2kjh8AhFG_1Sqmq7Cyr_-2MVi4HG70LE1QbZyYUMX4J';
 
         // Wait slightly for videojs if it hasn't loaded yet via defer
         var initPlayers = function() {
@@ -419,11 +387,6 @@
     document.addEventListener('mozfullscreenchange', manageScreenOrientation);
     document.addEventListener('MSFullscreenChange', manageScreenOrientation);
 </script>
-
-
-<script src="https://pl20213750.effectivecpmnetwork.com/95/bd/48/95bd48127f2c916d122b5cae3b2337f4.js"></script>
-
-<script src="https://pl18985032.effectivecpmnetwork.com/55/f3/06/55f3066ed55833a836f391b663a29b55.js"></script>
 
 </body>
 </html>
