@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -175,26 +176,17 @@
 </div>
 
 
-    </div>
+
+
 </div>
 
 
-    </div>
-</div>
-
-<div class="social-box" id="socialWidget">
-    <button style="align-self:flex-end;background:0 0;border:none;color:#aaa;font-size:16px;cursor:pointer;margin:-5px 0" onclick="document.getElementById('socialWidget').style.display='none';">&times;</button>
-    
-    <a href="https://t.me/nowzyplus" target="_blank" class="social-btn btn-tg">Follow on Telegram</a>
-</div>
 
 <div class="server-box">
-                    <button id="btn-0" class="server-btn badge-hd active" onclick="changeServer('https://cdn.jsdelivr.net/gh/srhady/Fancode-bd/raw_link/zimbabwe_vs_bangladesh_143401_english.m3u8', 0, 'HD')">
+                    <button id="btn-0" class="server-btn badge-hd active" onclick="changeServer('https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1500.m3u8?hdntl=Expires=1783709184~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Data=eyJzdWJzY3JpYmVyX2lkIjoiZDFjMTViMzYtOWQ3Ny00ZTlhLWExOTMtNDY0YjJkM2QyY2NmIn0~Signature=AWIR_5HUac_dIsEOa0nNZkjk2KqwMJsCyw8P1PUugx8NV2V1gPGYBum9dzRX9DHGC_sODtz_yN0JLL_9V-CRJWodiCAO', 0, 'HD')">
             Server 1        </button>
-                    <button id="btn-1" class="server-btn badge-hd " onclick="changeServer('https://content-aapm1.uplynk.com/8c8ff6ae69574e81aa2e8c2d71bdcaa7/f.m3u8?pbs=511853936a7247e6b1878d7f7a12eeaf', 1, 'HD')">
-            Server 2        </button>
-                    <button id="btn-2" class="server-btn badge-hd " onclick="changeServer('https://content-aapm1.uplynk.com/c44e4eb4ff774c5e8153e1d75ac7c195/f.m3u8?pbs=65c2c7fda9e34d14b5c2dd91bf49e0cf', 2, 'HD')">
-            Server 3        </button>
+                    <button id="btn-1" class="server-btn badge-hd " onclick="changeServer('https://pull.niues.live/live/stream-9912060_lhd.m3u8?auth_key=1783284383-0-0-ba541e77b9330eab42075af6aa5029e4', 1, 'HD')">
+            Server 4        </button>
     </div>
 
 <div class="global-live-indicator-box" id="liveIndicator">
@@ -207,7 +199,7 @@
 
 <div id="vjs-wrapper" style="display: block;">
     <video id="live-player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted playsinline preload="metadata">
-                <source src="https://cdn.jsdelivr.net/gh/srhady/Fancode-bd/raw_link/zimbabwe_vs_bangladesh_143401_english.m3u8" type="application/x-mpegURL">
+                <source src="https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1500.m3u8?hdntl=Expires=1783709184~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Data=eyJzdWJzY3JpYmVyX2lkIjoiZDFjMTViMzYtOWQ3Ny00ZTlhLWExOTMtNDY0YjJkM2QyY2NmIn0~Signature=AWIR_5HUac_dIsEOa0nNZkjk2KqwMJsCyw8P1PUugx8NV2V1gPGYBum9dzRX9DHGC_sODtz_yN0JLL_9V-CRJWodiCAO" type="application/x-mpegURL">
             </video>
 </div>
 
@@ -232,15 +224,6 @@
 
     const isTV = /SmartTV|Tizen|WebOS|BRAVIA|Android TV|AppleTV|Roku|TV/i.test(navigator.userAgent);
     if (isTV) { localStorage.setItem('isPremiumUnlocked', 'true'); }
-
-    function startUnlockProcess(){
-        window.open('https://facebook.com/tahmidx.tech2','_blank');
-        document.getElementById('fbLockerBtn').style.display='none';
-        let e=document.getElementById('lockerCountdown');e.style.display='block';
-        let n=5,t=['০','১','২','৩','৪','৫'];
-        document.getElementById('countNumber').innerText=t[n];
-        let o=setInterval((function(){document.hidden||!document.hasFocus()?(n--,n>=0&&(e.innerHTML=`চেক করা হচ্ছে... <span id="countNumber">${t[n]}</span> সেকেন্ড`),n<=0&&(clearInterval(o),localStorage.setItem('isPremiumUnlocked','true'),location.reload())):e.innerHTML=`আগে পেজ ফলো করুন, তারপর আবার ব্যাক আসুন...  <span id="countNumber">${t[n]}</span>`}),1e3)
-    }
 
     var hlsFluid = null;
     var fluidPlayerInstance = null;
@@ -269,11 +252,11 @@
 
     // Changed to DOMContentLoaded for instant loading
     document.addEventListener('DOMContentLoaded', function() {
-        var serverList = ["https:\/\/prod-cdn01-live.toffeelive.com\/live\/FIFA-2026-6\/0\/master_2000.m3u8?hdntl=Expires=1783610625~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AWIR_5GbjS4OAqpULeDt-HzevuQFSs40ddnTNgR2edP-fZqWK7biyof2cmm8jnUkvASApFUpY3hZSrOKAuPqbUbgdlgO","https:\/\/content-aapm1.uplynk.com\/8c8ff6ae69574e81aa2e8c2d71bdcaa7\/f.m3u8?pbs=511853936a7247e6b1878d7f7a12eeaf","https:\/\/content-aapm1.uplynk.com\/c44e4eb4ff774c5e8153e1d75ac7c195\/f.m3u8?pbs=65c2c7fda9e34d14b5c2dd91bf49e0cf"];
-        var qualityList = ["HD","HD","HD"];
+        var serverList = ["https:\/\/prod-cdn01-live.toffeelive.com\/live\/FIFA-2026\/sst\/0\/master_1500.m3u8?hdntl=Expires=1783709184~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Data=eyJzdWJzY3JpYmVyX2lkIjoiZDFjMTViMzYtOWQ3Ny00ZTlhLWExOTMtNDY0YjJkM2QyY2NmIn0~Signature=AWIR_5HUac_dIsEOa0nNZkjk2KqwMJsCyw8P1PUugx8NV2V1gPGYBum9dzRX9DHGC_sODtz_yN0JLL_9V-CRJWodiCAO","https:\/\/pull.niues.live\/live\/stream-9912060_lhd.m3u8?auth_key=1783284383-0-0-ba541e77b9330eab42075af6aa5029e4"];
+        var qualityList = ["HD","HD"];
         var currentServerIndex = 0, isSwitching = !1;
         var defaultQuality = 'HD';
-        var defaultStream = 'https://cdn.jsdelivr.net/gh/srhady/Fancode-bd/raw_link/zimbabwe_vs_bangladesh_143401_english.m3u8';
+        var defaultStream = 'https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/sst/0/master_1500.m3u8?hdntl=Expires=1783709184~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Data=eyJzdWJzY3JpYmVyX2lkIjoiZDFjMTViMzYtOWQ3Ny00ZTlhLWExOTMtNDY0YjJkM2QyY2NmIn0~Signature=AWIR_5HUac_dIsEOa0nNZkjk2KqwMJsCyw8P1PUugx8NV2V1gPGYBum9dzRX9DHGC_sODtz_yN0JLL_9V-CRJWodiCAO';
 
         // Wait slightly for videojs if it hasn't loaded yet via defer
         var initPlayers = function() {
@@ -320,10 +303,6 @@
 
             // New Server Switch Logic based on Quality Field
             window.changeServer = function(e, n, quality) {
-                const ad='https://www.effectivecpmnetwork.com/jcnk212s?key=9b06d3a430dadc55b28231abd6957bb6';
-                window.open(ad,'_blank');
-                setTimeout(function(){
-
                 if(0 === n && 0 !== currentServerIndex) return void window.location.reload();
                 if(n === currentServerIndex) return;
                 
@@ -353,7 +332,6 @@
                     initFluidPlayer(e);
                     isSwitching = !1;
                 }
-                },3000);
             };
 
             player.on('error',function(){
@@ -393,7 +371,6 @@
     document.addEventListener('mozfullscreenchange', manageScreenOrientation);
     document.addEventListener('MSFullscreenChange', manageScreenOrientation);
 </script>
-<script src="https://pl20213750.effectivecpmnetwork.com/95/bd/48/95bd48127f2c916d122b5cae3b2337f4.js"></script>
-<script src="https://pl18985032.effectivecpmnetwork.com/55/f3/06/55f3066ed55833a836f391b663a29b55.js"></script>
+
 </body>
 </html>
