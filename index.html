@@ -1,339 +1,693 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="referrer" content="same-origin" />
-    <title>লাইভ বিশ্বকাপ | খেলা দেখো.xyz</title>
-    <meta name="description" content="Watch FIFA World Cup live stream free in Bangladesh. বাংলাদেশে ফিফা বিশ্বকাপ লাইভ দেখুন। Free HD live football streaming on Khela Dekho." />
-    <meta name="keywords" content="FIFA World Cup live stream Bangladesh, বিশ্বকাপ লাইভ, World Cup live Bangladesh, football live stream BD, ফুটবল লাইভ, FIFA 2026 live, khela dekho, খেলা দেখো, free live football Bangladesh" />
-    <meta name="author" content="খেলা দেখো" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://kheladekho.xyz/" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://kheladekho.xyz/" />
-    <meta property="og:title" content="FIFA World Cup Live Stream Bangladesh | খেলা দেখো.xyz" />
-    <meta property="og:description" content="Watch FIFA World Cup live stream free in Bangladesh. বাংলাদেশে ফিফা বিশ্বকাপ লাইভ দেখুন। Free HD live football streaming." />
-    <meta property="og:locale" content="bn_BD" />
-    <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:site_name" content="খেলা দেখো.xyz" />
+    <title>JioTV Channels</title>
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="FIFA World Cup Live Stream Bangladesh | খেলা দেখো.xyz" />
-    <meta name="twitter:description" content="Watch FIFA World Cup live stream free in Bangladesh. বাংলাদেশে ফিফা বিশ্বকাপ লাইভ দেখুন।" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    <link rel="stylesheet" href="/vendor/video.js/video-js.min.css" />
-    <link href="/vendor/videojs-themes/sea.css" rel="stylesheet">
-    <link rel="stylesheet" href="/styles.css?v=20260725" />
-    <link rel="stylesheet" href="/penalty-game.css" />
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0b0b0f;
+            color: #fff;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #111116;
+            border-bottom: 1px solid #25252d;
+            padding: 16px 20px;
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: #e50914;
+        }
+
+        /* Search */
+        .search-box {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .search-box input {
+            width: 100%;
+            background: #1b1b22;
+            border: 1px solid #303039;
+            border-radius: 8px;
+            padding: 12px 15px;
+            color: #fff;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .search-box input:focus {
+            border-color: #e50914;
+        }
+
+        /* Filters */
+        .filters {
+            max-width: 1400px;
+            margin: 20px auto 5px;
+            padding: 0 20px;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding-bottom: 5px;
+        }
+
+        .filter-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-btn {
+            flex-shrink: 0;
+            border: 1px solid #303039;
+            background: #17171d;
+            color: #ccc;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #e50914;
+            border-color: #e50914;
+            color: #fff;
+        }
+
+        /* Channel count */
+        .channel-info {
+            max-width: 1400px;
+            margin: 18px auto 12px;
+            padding: 0 20px;
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Grid */
+        .channel-grid {
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 20px 40px;
+
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 16px;
+        }
+
+        /* Card */
+        .channel-card {
+            background: #15151b;
+            border: 1px solid #24242c;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .channel-card:hover {
+            transform: translateY(-4px);
+            border-color: #44444f;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+        }
+
+        .channel-logo {
+            width: 100%;
+            height: 130px;
+            background: #fff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+        }
+
+        .channel-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .channel-logo .placeholder {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .channel-details {
+            padding: 11px;
+        }
+
+        .channel-name {
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .channel-meta {
+            margin-top: 7px;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 10px;
+            color: #aaa;
+            background: #22222a;
+            padding: 4px 7px;
+            border-radius: 4px;
+        }
+
+        .catchup {
+            color: #8ee28e;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 70px 20px;
+            color: #aaa;
+        }
+
+        .spinner {
+            width: 35px;
+            height: 35px;
+            border: 3px solid #333;
+            border-top-color: #e50914;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Empty */
+        .empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 70px 20px;
+            color: #888;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            header {
+                padding: 12px 15px;
+            }
+
+            .header-inner {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .logo {
+                text-align: center;
+                font-size: 21px;
+            }
+
+            .search-box {
+                max-width: none;
+            }
+
+            .filters {
+                padding: 0 15px;
+            }
+
+            .channel-info {
+                padding: 0 15px;
+            }
+
+            .channel-grid {
+                padding: 0 12px 30px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .channel-logo {
+                height: 105px;
+            }
+
+            .channel-details {
+                padding: 9px;
+            }
+
+            .channel-name {
+                font-size: 13px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <div id="android-banner" class="android-banner" style="display: none;">
-        <span>Install our Android app for a better experience!</span>
-        <a href="https://kheladekho.xyz/khela-dekho.apk" class="android-banner-btn">Download</a>
-        <button class="android-banner-close" aria-label="Dismiss" onclick="this.parentElement.style.display='none'">✕</button>
+
+<header>
+    <div class="header-inner">
+
+        <div class="logo">
+            <span>Jio</span>TV Channels
+        </div>
+
+        <div class="search-box">
+            <input
+                type="search"
+                id="search"
+                placeholder="Search channels..."
+                autocomplete="off"
+            >
+        </div>
+
+    </div>
+</header>
+
+
+<div class="filters">
+
+    <div class="filter-row" id="genreFilters">
+        <button class="filter-btn active" data-genre="all">
+            All
+        </button>
     </div>
 
-    <main>
+</div>
 
-        <!-- Match strip -->
-        <section class="match-strip-section" id="match-strip-section" style="display:none">
-          <div class="match-strip-header">
-            <span class="match-strip-title" id="match-strip-title">Matches</span>
-            <a href="/fixture.html" class="match-strip-all">Full fixture →</a>
-          </div>
-          <div class="match-strip" id="matchStrip"></div>
-        </section>
 
-        <!-- Promo marquee -->
-        <a class="promo-marquee" href="https://www.facebook.com/profile.php?id=61590818034879" target="_blank" rel="noopener" aria-label="বিশ্বকাপের ম্যাচ ছাড়াও লাইভ টিভি, সিরিজ ও মুভি দেখতে ফেসবুকে মেসেজ করুন">
-          <div class="promo-marquee-track">
-            <span class="promo-marquee-item">👉 La Liga, EPL, Champions league এর খেলা paid দেখতে Facebook-এ মেসেজ করুন 📺 লাইভ টিভি, সিরিজ ও মুভি দেখতে চাইলে আমাদের ফেসবুকে মেসেজ করুন</span>
-            <span class="promo-marquee-item" aria-hidden="true">👉 La liga, EPL, Champions league এর খেলা paid দেখতে Facebook-এ মেসেজ করুন 📺 লাইভ টিভি, সিরিজ ও মুভি দেখতে চাইলে আমাদের ফেসবুকে মেসেজ করুন</span>
-          </div>
-        </a>
+<div class="channel-info">
+    <span id="channelCount">Loading channels...</span>
+</div>
 
-        <!-- Channel strip -->
-        <section class="channel-strip">
-            <p class="channel-hint">এক চ্যানেল কাজ না করলে অন্য চ্যানেল ট্রাই করুন ↓</p>
-            <!-- Sport filter tabs: built dynamically from channel data -->
-            <div id="sport-tabs" class="cat-tabs cat-tabs--sport" role="tablist" aria-label="Sport"></div>
-            <div id="channel-status" class="status" hidden></div>
-            <div id="channels-scroll" class="channels-scroll">
-                <ul id="channels" class="channels"></ul>
-            </div>
-        </section>
 
-        <!-- Player + public chat -->
-        <div class="player-row">
+<div id="loading" class="loading">
+    <div class="spinner"></div>
+    Loading channels...
+</div>
 
-        <section class="player-section" id="player-section">
-            <div class="player-meta">
-                <span id="player-status" class="player-status"></span>
-                <button id="copy-stream-link-btn" class="copy-stream-link-btn" type="button" hidden>This stream is not supported by your browser, click here</button>
-            </div>
-            <div class="video-wrap">
-                <video id="video" class="video-js vjs-theme-city" playsinline></video>
-                <div class="watermark">খেলা দেখো.xyz</div>
-                <div id="overlay" class="overlay">
-                    <span id="overlay-text">Pick a channel above ↑</span>
-                </div>
-                <!-- Chat bubble overlay — room messages float up from here -->
-                <div id="chat-overlay" class="chat-overlay" aria-live="off"></div>
-                <!-- Skip button shown during skippable VAST ads -->
-                <div id="ad-skip" class="ad-skip" hidden>
-                    <span id="ad-skip-countdown" class="ad-skip-countdown"></span>
-                    <button id="ad-skip-btn" class="ad-skip-btn" hidden>Skip Ad ›</button>
-                </div>
-                <!-- Shown once after muted autoplay; dismissed on click to unmute -->
-                <div id="unmute-prompt" class="unmute-prompt" hidden>
-                    <button class="unmute-btn" aria-label="Click to unmute">
-                        <svg class="unmute-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor"/>
-                            <line x1="23" y1="9" x2="17" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            <line x1="17" y1="9" x2="23" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        <span>Tap to unmute</span>
-                    </button>
-                </div>
-            </div>
-            <div id="network-speed" class="network-speed" hidden></div>
-            <div class="player-actions">
-                <button type="button" id="update-sub-key-btn" class="fixture-link fixture-link-btn" hidden>🔑 সাবস্ক্রিপশন কী আপডেট করুন</button>
-            </div>
-        </section>
 
-        <!-- Public live chat (hidden for now) -->
-        <aside class="public-chat" id="public-chat" hidden>
-            <div class="pc-header">
-                <span class="pc-title">💬 Live Chat</span>
-                <span id="pc-status" class="pc-status"></span>
-                <button type="button" id="pc-mute-btn" class="pc-mute-btn" aria-label="Hide live chat" aria-pressed="false">Hide</button>
-            </div>
-            <div id="pc-body" class="pc-body">
-                <div id="pc-messages" class="pc-messages"></div>
-                <form id="pc-form" class="pc-form" autocomplete="off">
-                    <input id="pc-nick" class="pc-input pc-nick-input" type="text"
-                           placeholder="Your name" maxlength="16" />
-                    <div class="pc-row">
-                        <input id="pc-text" class="pc-input pc-text-input" type="text"
-                               placeholder="Say something…" maxlength="200" />
-                        <button type="submit" class="pc-send">Send</button>
-                    </div>
-                </form>
-                <p id="pc-premium-notice" class="pc-premium-notice" hidden>Chat is only available to premium subscribers</p>
-            </div>
-        </aside>
+<div id="channelGrid" class="channel-grid"></div>
 
-        </div><!-- .player-row -->
 
-        <!-- Channel strip repeated below the player, full list, no scrolling -->
-        <section class="channel-strip channel-strip--below">
-            <div id="channels-below" class="channels-below">
-                <ul id="channels-below-list" class="channels"></ul>
-            </div>
-        </section>
+<script>
 
-        <!-- Room bar -->
-        <section class="room-bar">
-            <div id="room-idle" class="room-idle">
-                <button id="room-create-btn" class="room-create-btn">👥 Watch Together</button>
-            </div>
-            <div id="room-active" class="room-active" hidden>
-                <div class="room-header">
-                    <span class="room-label">Room</span>
-                    <code id="room-id-display" class="room-id"></code>
-                    <button id="room-copy-btn" class="room-btn">Copy Link</button>
-                    <button id="room-leave-btn" class="room-btn room-btn-leave">Leave</button>
-                </div>
-                <div class="room-emoji-bar">
-                    <button class="emoji-btn" data-emoji="⚽">⚽</button>
-                    <button class="emoji-btn" data-emoji="🔥">🔥</button>
-                    <button class="emoji-btn" data-emoji="🎉">🎉</button>
-                    <button class="emoji-btn" data-emoji="🏆">🏆</button>
-                    <button class="emoji-btn" data-emoji="👏">👏</button>
-                    <button class="emoji-btn" data-emoji="🙌">🙌</button>
-                    <button class="emoji-btn" data-emoji="💪">💪</button>
-                    <button class="emoji-btn" data-emoji="🙏">🙏</button>
-                    <button class="emoji-btn" data-emoji="😱">😱</button>
-                    <button class="emoji-btn" data-emoji="🤯">🤯</button>
-                    <button class="emoji-btn" data-emoji="😭">😭</button>
-                    <button class="emoji-btn" data-emoji="😡">😡</button>
-                    <button class="emoji-btn" data-emoji="😤">😤</button>
-                    <button class="emoji-btn" data-emoji="🤣">🤣</button>
-                    <button class="emoji-btn" data-emoji="😬">😬</button>
-                    <button class="emoji-btn" data-emoji="💀">💀</button>
-                    <button class="emoji-btn" data-emoji="❤️">❤️</button>
-                    <button class="emoji-btn" data-emoji="🥳">🥳</button>
-                    <button class="emoji-btn" data-emoji="😂">😂</button>
-                    <button class="emoji-btn" data-emoji="🤡">🤡</button>
-                    <button class="emoji-btn" data-emoji="👋">👋</button>
-                    <button class="emoji-btn" data-emoji="💩">💩</button>
-                    <button class="emoji-btn" data-emoji="😴">😴</button>
-                    <button class="emoji-btn" data-emoji="🤦">🤦</button>
-                    <button class="emoji-btn" data-emoji="🫵">🫵</button>
-                    <button class="emoji-btn" data-emoji="😏">😏</button>
-                </div>
-                <form id="room-chat-form" class="room-chat-form">
-                    <input id="room-nick-input" class="room-nick-input" type="text"
-                           placeholder="Name" maxlength="10" autocomplete="off" />
-                    <input id="room-chat-input" class="room-chat-input" type="text"
-                           placeholder="Type a comment…" maxlength="200" autocomplete="off" />
-                    <button type="submit" class="room-btn room-btn-send">Send</button>
-                </form>
-            </div>
-        </section>
+const DATA_URL =
+    "https://gist.githubusercontent.com/mitthu786/6719418610aa81997e72d6c27a6a2e39/raw/tsjiotvnew.json";
 
-    </main>
+const PLAY_PAGE = "play.html";
 
-    <footer>
-        <div>
-        <a href="/blog/watch-fifa-world-cup-2026.html" class="fixture-link">📖 How to Watch →</a>
-        </div>
-        <div class="banners-row">
-            <div class="fb-group-banner">
-                <span class="fb-group-text">⚽ খেলা দেখতে অসুবিধা হলে আমাদের Facebook গ্রুপে যোগাযোগ করুন!</span>
-                <a href="https://www.facebook.com/groups/1632378275562507" target="_blank" rel="noopener noreferrer" class="fb-group-btn">Join Group →</a>
-            </div>
-        </div>
-    </footer>
+let channels = [];
+let activeGenre = "all";
+let searchText = "";
 
-    <script>
-    (function () {
-      function toAmPm(hhmm) {
-        const [h, m] = hhmm.split(':').map(Number);
-        const suffix = h < 12 ? 'AM' : 'PM';
-        const hour   = h % 12 || 12;
-        return `${hour}:${String(m).padStart(2, '0')} ${suffix}`;
-      }
 
-      function loadMatches() {
-        fetch('/api/worldcup/live')
-          .then(r => r.json())
-          .then(data => renderMatchStrip(data.live, data.upcoming))
-          .catch(() => {});
-      }
+/*
+|--------------------------------------------------------------------------
+| Load JSON
+|--------------------------------------------------------------------------
+*/
 
-      function renderMatchStrip(liveMatch, upcomingMatches) {
-        const nowMs    = Date.now();
-        const live     = Array.isArray(liveMatch) ? liveMatch : (liveMatch ? [liveMatch] : []);
-        const upcoming = upcomingMatches || [];
-        const shown    = [...live, ...upcoming];
-        if (!shown.length) return;
+async function loadChannels() {
 
-        const section = document.getElementById('match-strip-section');
-        const strip   = document.getElementById('matchStrip');
-        const title   = document.getElementById('match-strip-title');
+    const loading = document.getElementById("loading");
 
-        title.innerHTML = live.length
-          ? `<span class="ms-live-dot"></span> Live &amp; Upcoming`
-          : 'Upcoming Matches';
+    try {
 
-        const promoCard = `
-            <a href="https://www.facebook.com/profile.php?id=61590818034879" target="_blank" rel="noopener noreferrer" class="ms-card ms-card-promo">
-              <span class="ms-tag ms-tag-promo">⚡ BDIX</span>
-              <div class="ms-promo-body">
-                <span class="ms-promo-title">FHD বিশ্বকাপ দেখুন</span>
-                <span class="ms-promo-sub">মাত্র ২০ টাকায়</span>
-              </div>
-              <span class="ms-promo-cta">Message Now →</span>
-            </a>`;
-
-        const cards = shown.map((m, i) => {
-          const isLive = i < live.length;
-          const isDone = !!m.score?.ft;
-
-          let centerHtml;
-          if (isDone) {
-            const [s1, s2] = m.score.ft;
-            centerHtml = `<span class="ms-score">${s1} – ${s2}</span>`;
-          } else if (isLive) {
-            centerHtml = `<span class="ms-vs ms-live-text">LIVE</span>`;
-          } else {
-            const [y, mo, d] = m.date_bd.split('-').map(Number);
-            const today = new Date();
-            const isToday = today.getFullYear() === y && (today.getMonth() + 1) === mo && today.getDate() === d;
-            const dateLabel = isToday
-              ? 'Today'
-              : new Date(Date.UTC(y, mo - 1, d)).toLocaleDateString('en-US', { day: 'numeric', month: 'short', timeZone: 'UTC' });
-            centerHtml = `<span class="ms-time">${toAmPm(m.time_bd)}</span><span class="ms-date">${dateLabel}</span>`;
-          }
-
-          return `
-            <div class="ms-card${isLive ? ' ms-card-live' : ''}">
-              ${m.group ? `<span class="ms-tag">${m.group}</span>` : `<span class="ms-tag ms-tag-ko">${m.round}</span>`}
-              <div class="ms-teams">
-                <div class="ms-team">
-                  <span class="ms-flag">${m.team1.flag || '🏳️'}</span>
-                  <span class="ms-name">${m.team1.name}</span>
-                </div>
-                <div class="ms-center">${centerHtml}</div>
-                <div class="ms-team ms-team-r">
-                  <span class="ms-flag">${m.team2.flag || '🏳️'}</span>
-                  <span class="ms-name">${m.team2.name}</span>
-                </div>
-              </div>
-              <div class="ms-venue">${m.ground}</div>
-            </div>`;
+        const response = await fetch(DATA_URL, {
+            cache: "no-store"
         });
 
-        cards.splice(1, 0, promoCard);
-        strip.innerHTML = cards.join('');
-
-        section.style.display = '';
-
-        // mouse-wheel → horizontal scroll
-        strip.addEventListener('wheel', e => {
-          if (e.deltaY === 0) return;
-          e.preventDefault();
-          strip.scrollBy({ left: e.deltaY * 1.2, behavior: 'smooth' });
-        }, { passive: false });
-      }
-
-      loadMatches();
-    })();
-
-    // Keep watermark, chat overlay, and room controls visible in fullscreen by reparenting
-    (function () {
-      const EVENTS = ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange'];
-      EVENTS.forEach(evt => document.addEventListener(evt, () => {
-        const watermark   = document.querySelector('.watermark');
-        const chatOverlay = document.querySelector('#chat-overlay');
-        const roomActive  = document.querySelector('#room-active');
-        const roomBar     = document.querySelector('.room-bar');
-        const wrap        = document.querySelector('.video-wrap');
-        const fullEl      = document.fullscreenElement
-                         || document.webkitFullscreenElement
-                         || document.mozFullScreenElement;
-        if (fullEl) {
-          fullEl.appendChild(watermark);
-          fullEl.appendChild(chatOverlay);
-          roomActive.classList.add('fullscreen-chat-panel');
-          fullEl.appendChild(roomActive);
-          chatOverlay.classList.toggle('fullscreen-in-room', !roomActive.hidden);
-        } else {
-          wrap.prepend(watermark);
-          wrap.appendChild(chatOverlay);
-          roomActive.classList.remove('fullscreen-chat-panel');
-          chatOverlay.classList.remove('fullscreen-in-room');
-          roomBar.appendChild(roomActive);
+        if (!response.ok) {
+            throw new Error("HTTP " + response.status);
         }
-      }));
-    })();
-    </script>
-    <script src="/vendor/video.js/video.min.js"></script>
-    <script src="/vendor/videojs-hls-quality-selector/videojs-hls-quality-selector.min.js"></script>
-    <script src="/app.js?v=20260725"></script>
-    <script src="/penalty-game.js"></script>
-    <script>
-        if (/android/i.test(navigator.userAgent)) {
-            document.getElementById('android-banner').style.display = 'flex';
-        } else {
-            document.getElementById('android-banner').style.display = 'none';
+
+        const data = await response.json();
+
+        if (!Array.isArray(data)) {
+            throw new Error("Invalid JSON format");
         }
-    </script>
+
+        channels = data;
+
+        loading.style.display = "none";
+
+        createGenreFilters();
+        renderChannels();
+
+    } catch (error) {
+
+        console.error(error);
+
+        loading.innerHTML = `
+            <div style="font-size:35px;margin-bottom:10px;">⚠️</div>
+            <div>Unable to load channels.</div>
+            <div style="font-size:12px;margin-top:8px;color:#666;">
+                Please try again later.
+            </div>
+        `;
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Create Genre Filters
+|--------------------------------------------------------------------------
+*/
+
+function createGenreFilters() {
+
+    const container = document.getElementById("genreFilters");
+
+    const genres = [
+        ...new Set(
+            channels
+                .map(channel => channel.genre)
+                .filter(Boolean)
+        )
+    ].sort();
+
+    genres.forEach(genre => {
+
+        const button = document.createElement("button");
+
+        button.className = "filter-btn";
+
+        button.dataset.genre = genre;
+
+        button.textContent = genre;
+
+        button.addEventListener("click", () => {
+
+            activeGenre = genre;
+
+            document
+                .querySelectorAll(".filter-btn")
+                .forEach(btn => btn.classList.remove("active"));
+
+            button.classList.add("active");
+
+            renderChannels();
+        });
+
+        container.appendChild(button);
+    });
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Clean Image URL
+|--------------------------------------------------------------------------
+|
+| Supports both:
+|
+| https://example.com/logo.png
+|
+| and:
+|
+| [https://example.com/logo.png](https://example.com/logo.png)
+|
+|--------------------------------------------------------------------------
+*/
+
+function cleanImageUrl(url) {
+
+    if (!url) {
+        return "";
+    }
+
+    url = String(url).trim();
+
+    // Markdown image/link format
+    const markdown = url.match(
+        /^\[.*?\]\((https?:\/\/[^)]+)\)$/
+    );
+
+    if (markdown) {
+        return markdown[1];
+    }
+
+    // Remove accidental brackets
+    url = url.replace(/^\[/, "");
+    url = url.replace(/\]$/, "");
+
+    return url;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Filter Channels
+|--------------------------------------------------------------------------
+*/
+
+function getFilteredChannels() {
+
+    return channels.filter(channel => {
+
+        const genreMatch =
+            activeGenre === "all" ||
+            String(channel.genre || "").toLowerCase() ===
+            activeGenre.toLowerCase();
+
+        const searchTarget = [
+            channel.name,
+            channel.link2,
+            channel.genre,
+            channel.lang
+        ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+        const searchMatch =
+            !searchText ||
+            searchTarget.includes(searchText);
+
+        return genreMatch && searchMatch;
+    });
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Render Channels
+|--------------------------------------------------------------------------
+*/
+
+function renderChannels() {
+
+    const grid = document.getElementById("channelGrid");
+    const count = document.getElementById("channelCount");
+
+    const filtered = getFilteredChannels();
+
+    count.textContent =
+        `${filtered.length} channel${filtered.length === 1 ? "" : "s"}`;
+
+    grid.innerHTML = "";
+
+    if (!filtered.length) {
+
+        grid.innerHTML = `
+            <div class="empty">
+                No channels found.
+            </div>
+        `;
+
+        return;
+    }
+
+    filtered.forEach(channel => {
+
+        const card = document.createElement("div");
+
+        card.className = "channel-card";
+
+        /*
+         * Open:
+         * play.html?id=CHANNEL_ID
+         */
+        card.addEventListener("click", () => {
+
+            if (!channel.id) return;
+
+            window.location.href =
+                PLAY_PAGE +
+                "?id=" +
+                encodeURIComponent(channel.id);
+        });
+
+
+        const imageUrl = cleanImageUrl(channel.img);
+
+        const name =
+            channel.link2 ||
+            channel.name ||
+            "Unknown Channel";
+
+        const genre =
+            channel.genre ||
+            "General";
+
+        const language =
+            channel.lang ||
+            "";
+
+
+        card.innerHTML = `
+
+            <div class="channel-logo">
+
+                ${
+                    imageUrl
+                    ?
+                    `<img
+                        src="${escapeHtml(imageUrl)}"
+                        alt="${escapeHtml(name)}"
+                        loading="lazy"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
+                    >`
+                    :
+                    ""
+                }
+
+                <div
+                    class="placeholder"
+                    style="${imageUrl ? "display:none" : ""}"
+                >
+                    No Logo
+                </div>
+
+            </div>
+
+            <div class="channel-details">
+
+                <div
+                    class="channel-name"
+                    title="${escapeHtml(name)}"
+                >
+                    ${escapeHtml(name)}
+                </div>
+
+                <div class="channel-meta">
+
+                    <span class="tag">
+                        ${escapeHtml(genre)}
+                    </span>
+
+                    ${
+                        language
+                        ?
+                        `<span class="tag">
+                            ${escapeHtml(language)}
+                        </span>`
+                        :
+                        ""
+                    }
+
+                    ${
+                        String(channel.catchup) === "1"
+                        ?
+                        `<span class="tag catchup">
+                            Catch-up
+                        </span>`
+                        :
+                        ""
+                    }
+
+                </div>
+
+            </div>
+        `;
+
+        grid.appendChild(card);
+    });
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Search
+|--------------------------------------------------------------------------
+*/
+
+document
+    .getElementById("search")
+    .addEventListener("input", function () {
+
+        searchText =
+            this.value.trim().toLowerCase();
+
+        renderChannels();
+    });
+
+
+/*
+|--------------------------------------------------------------------------
+| Basic HTML escaping
+|--------------------------------------------------------------------------
+*/
+
+function escapeHtml(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Start
+|--------------------------------------------------------------------------
+*/
+
+loadChannels();
+
+</script>
+
 </body>
 </html>
