@@ -1,579 +1,262 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=en>
+<![endif]--><!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" lang=en>
+<![endif]--><!--[if IE 8]>
+<html class="no-js lt-ie9" lang=en>
+<![endif]--><!--[if gt IE 8]><!-->
+<html class=no-js lang=zxx>
+<!--<![endif]-->
+<!-- Mirrored from live.envalab.com/html/enva/Style-2/index-line.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 28 Apr 2018 07:55:44 GMT -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset=utf-8>
+    <meta content="ie=edge" http-equiv=x-ua-compatible>
+    <title>Plusbox Live | Watch TV Online</title>
+    <meta content="" name=description>
+    <meta content="width=device-width,initial-scale=1" name=viewport>
+    <meta property="og:title" content="Plusbox | Watch TV Online">
+    <meta property="og:site_name" content="Plusbox Live">
+    <meta property="og:url" content="https://hdtv.rangdhanu.live">
+    <meta property="og:description" content="Your Ultimate Entertainer">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="http://tv.rangdhanu.live/img/rangdhanulive.png">
+    <link href=favicon.ico rel="shortcut icon" type=image/x-icon>
+    <link href=favicon.ico rel=icon type=image/x-icon>
 
-    <title>NowzyPlay</title>
+    <!--Added by Mishu Starts-->
+    <!-- Including Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Including FontAwesome Kit -->
+    <script src="https://kit.fontawesome.com/1c781ab882.js" crossorigin="anonymous"></script>
+    <!-- Including Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    <!-- Adding jQuery UI cdn-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #0b0b0f;
-            color: #fff;
-        }
+    <!-- Adding VUE and Axios cdn-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-        /* Header */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: #111116;
-            border-bottom: 1px solid #25252d;
-            padding: 16px 20px;
-        }
+    <!-- Including Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <!--Added by Mishu Ends-->
 
-        .header-inner {
-            max-width: 1400px;
-            margin: auto;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            justify-content: space-between;
-        }
+    </script>
+    <!--[if lte IE9]><script src=js/modernizr-3.5.0.min.js ></script><![endif]-->
 
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        .logo span {
-            color: #e50914;
-        }
-
-        /* Search */
-        .search-box {
-            width: 100%;
-            max-width: 450px;
-        }
-
-        .search-box input {
-            width: 100%;
-            background: #1b1b22;
-            border: 1px solid #303039;
-            border-radius: 8px;
-            padding: 12px 15px;
-            color: #fff;
-            outline: none;
-            font-size: 14px;
-        }
-
-        .search-box input:focus {
-            border-color: #e50914;
-        }
-
-        /* Filters */
-        .filters {
-            max-width: 1400px;
-            margin: 20px auto 5px;
-            padding: 0 20px;
-        }
-
-        .filter-row {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            scrollbar-width: none;
-            padding-bottom: 5px;
-        }
-
-        .filter-row::-webkit-scrollbar {
-            display: none;
-        }
-
-        .filter-btn {
-            flex-shrink: 0;
-            border: 1px solid #303039;
-            background: #17171d;
-            color: #ccc;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 13px;
-            transition: 0.2s;
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: #e50914;
-            border-color: #e50914;
-            color: #fff;
-        }
-
-        /* Channel count */
-        .channel-info {
-            max-width: 1400px;
-            margin: 18px auto 12px;
-            padding: 0 20px;
-            color: #999;
-            font-size: 14px;
-        }
-
-        /* Grid */
-        .channel-grid {
-            max-width: 1400px;
-            margin: auto;
-            padding: 0 20px 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-            gap: 16px;
-        }
-
-        /* Card */
-        .channel-card {
-            background: #15151b;
-            border: 1px solid #24242c;
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-        }
-
-        .channel-card:hover {
-            transform: translateY(-4px);
-            border-color: #44444f;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.35);
-        }
-
-        .channel-logo {
-            width: 100%;
-            height: 130px;
-            background: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .channel-logo img {
-            width: 80%;
-            height: 80%;
-            object-fit: contain;
-        }
-
-        .channel-logo .placeholder {
-            color: #777;
-            font-size: 13px;
-        }
-
-        .channel-details {
-            padding: 11px;
-        }
-
-        .channel-name {
-            font-size: 14px;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .channel-meta {
-            margin-top: 7px;
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            font-size: 10px;
-            color: #aaa;
-            background: #22222a;
-            padding: 4px 7px;
-            border-radius: 4px;
-        }
-
-        .catchup {
-            color: #8ee28e;
-        }
-
-        /* Loading */
-        .loading {
-            text-align: center;
-            padding: 70px 20px;
-            color: #aaa;
-        }
-
-        .spinner {
-            width: 35px;
-            height: 35px;
-            border: 3px solid #333;
-            border-top-color: #e50914;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 15px;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Empty */
-        .empty {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 70px 20px;
-            color: #888;
-        }
-
-        /* Mobile */
-        @media (max-width: 600px) {
-            header {
-                padding: 12px 15px;
-            }
-
-            .header-inner {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 12px;
-            }
-
-            .logo {
-                text-align: center;
-                font-size: 21px;
-            }
-
-            .search-box {
-                max-width: none;
-            }
-
-            .filters {
-                padding: 0 15px;
-            }
-
-            .channel-info {
-                padding: 0 15px;
-            }
-
-            .channel-grid {
-                padding: 0 12px 30px;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-
-            .channel-logo {
-                height: 105px;
-            }
-
-            .channel-details {
-                padding: 9px;
-            }
-
-            .channel-name {
-                font-size: 13px;
-            }
-        }
-    </style>
 </head>
 
-<body>
+<!--<body class="bg-img body-bg">-->
+<body class="bg-custom-dark">
+<!--[if lte IE 9]>
+<p class=browserupgrade>
+    You are using an <strong>outdated</strong> browser. Please <a href=https://browsehappy.com/ >upgrade your
+    browser</a> to improve your experience and security.<![endif]-->
+<!--<div class=preloader-wrap>-->
+<!--    <div class=preloader><span></span> <span></span> <span></span> <span></span></div>-->
+<!--</div>-->
 
-<header>
-    <div class="header-inner">
 
-        <div class="logo">
-            <span>Nowzy</span>Play
+
+<section class="main-content">
+
+    <div class="container">
+        <header class="py-4">
+
+            <div class="d-flex align-items-center justify-content-between flex-wrap flex-md-nowrap">
+                <a href="#" class="site-logo pr-3 pr-md-0 order-1 order-md-0">
+                    <img src="img/logo.png" class="img-fluid" id="logo">
+                </a>
+
+                <div class="mid-screen-search order-sm-0 order-0 order-md-1 pb-4 pb-md-0">
+                    <form>
+                        <div class="form-group m-0" id="scrollable-dropdown-menu">
+                            <input type="text" class="form-control rounded-pill search typeahead" id="search-input" placeholder="      Search...">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="mid-screen-app pl-3 pl-md-0 order-2 order-md-2">
+                    <a href="plusboxtv.apk" download><img src="/backup/img/appdownload.svg" class="img-fluid" id="download-icon"></a>
+                </div>
+            </div>
+        </header>
+
+        <div class="player-with-slider">
+            <div class="col-12 p-0">
+                <div id="playerholder" class="w-100 position-relative bg-white embed-responsive embed-responsive-16by9">
+                    <iframe id="player" frameborder="0" class="embed-responsive-item" allowfullscreen src="img/welcome.png"></iframe>
+                </div>
+<!--                <video id="player" class="w-100 position-relative bg-white"></video>-->
+                <div class="slider responsive w-100 mt-4">
+
+                    <div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#BTV World" data-source="https://backend.plusbox.tv/BTVWorld/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="BTVWorld"><img alt="" class="rounded-lg" src="img/channels/btvworld.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#BTV" data-source="https://backend.plusbox.tv/BTV/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="BTV"><img alt="" class="rounded-lg" src="img/channels/btv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#ATN Bangla" data-source="https://backend.plusbox.tv/ATNBangla/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="ATNBangla"><img alt="" class="rounded-lg" src="img/channels/atnbangla.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#ATN News" data-source="https://backend.plusbox.tv/ATNNews/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="ATNNews"><img alt="" class="rounded-lg" src="img/channels/atnnews.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Bijoy TV" data-source="https://backend.plusbox.tv/BijoyTV/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="BijoyTV"><img alt="" class="rounded-lg" src="img/channels/bijoytv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Asian TV" data-source="https://backend.plusbox.tv/AsianTV/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="AsianTV"><img alt="" class="rounded-lg" src="img/channels/asiantv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Bangla Vision" data-source="https://backend.plusbox.tv/BanglaVision/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="BanglaVision"><img alt="" class="rounded-lg" src="img/channels/banglavision.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Channel 24" data-source="https://backend.plusbox.tv/Channel24/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="Channel24"><img alt="" class="rounded-lg" src="img/channels/channel24.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Channel I" data-source="https://backend.plusbox.tv/ChannelI/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="ChannelI"><img alt="" class="rounded-lg" src="img/channels/channeli.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#DBC News" data-source="https://backend.plusbox.tv/DBCNews/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="DBCNews"><img alt="" class="rounded-lg" src="img/channels/dbcnews.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Channel 9" data-source="https://backend.plusbox.tv/Channel9/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="Channel9"><img alt="" class="rounded-lg" src="img/channels/channel9.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Deepto TV" data-source="https://backend.plusbox.tv/DeeptoTV/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="DeeptoTV"><img alt="" class="rounded-lg" src="img/channels/deeptotv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Desh TV" data-source="https://backend.plusbox.tv/DeshTV/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="DeshTV"><img alt="" class="rounded-lg" src="img/channels/deshtv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Ekattor TV" data-source="https://backend.plusbox.tv/EkattorTV/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="EkattorTV"><img alt="" class="rounded-lg" src="img/channels/ekattortv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Ekushey Tv" data-source="https://backend.plusbox.tv/EkusheyTv/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="EkusheyTv"><img alt="" class="rounded-lg" src="img/channels/ekusheytv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#T Sports" data-source="https://backend.plusbox.tv/TSports/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="TSports"><img alt="" class="rounded-lg" src="img/channels/tsports.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#T Sports HD" data-source="https://backend.plusbox.tv/TSportsHD/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="TSportsHD"><img alt="" class="rounded-lg" src="img/channels/tsports.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Independent TV" data-source="https://backend.plusbox.tv/IndependentTV/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="IndependentTV"><img alt="" class="rounded-lg" src="img/channels/independent.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Gazi TV HD" data-source="https://backend.plusbox.tv/GaziTVHD/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="GaziTVHD"><img alt="" class="rounded-lg" src="img/channels/gtv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Jamuna TV" data-source="https://backend.plusbox.tv/JamunaTV/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="JamunaTV"><img alt="" class="rounded-lg" src="img/channels/jamunatv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Maasranga" data-source="https://backend.plusbox.tv/Maasranga/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="Maasranga"><img alt="" class="rounded-lg" src="img/channels/maasranga.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#My TV" data-source="https://backend.plusbox.tv/MyTV/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="MyTV"><img alt="" class="rounded-lg" src="img/channels/mytv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#StarNews" data-source="https://backend.plusbox.tv/StarNews/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="StarNews"><img alt="" class="rounded-lg" src="img/channels/starnews.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#News 24" data-source="https://backend.plusbox.tv/News24/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="News24"><img alt="" class="rounded-lg" src="img/channels/news24.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#NTV" data-source="https://backend.plusbox.tv/NTV/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="NTV"><img alt="" class="rounded-lg" src="img/channels/ntv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#RTV" data-source="https://backend.plusbox.tv/RTV/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="RTV"><img alt="" class="rounded-lg" src="img/channels/rtv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Somoy Tv" data-source="https://backend.plusbox.tv/SomoyTv/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="SomoyTv"><img alt="" class="rounded-lg" src="img/channels/somoytv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Ekhon TV" data-source="https://backend.plusbox.tv/EkhonTV/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="EkhonTV"><img alt="" class="rounded-lg" src="img/channels/ekhontv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Colors Bangla" data-source="https://backend.plusbox.tv/ColorsBangla/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="ColorsBangla"><img alt="" class="rounded-lg" src="img/channels/colorsbangla.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#India Today" data-source="https://backend.plusbox.tv/IndiaToday/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="IndiaToday"><img alt="" class="rounded-lg" src="img/channels/indiatoday.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Russia Today" data-source="https://backend.plusbox.tv/RussiaToday/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="RussiaToday"><img alt="" class="rounded-lg" src="img/channels/russiatoday.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#RedBull TV" data-source="https://backend.plusbox.tv/RedBullTV/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="RedBullTV"><img alt="" class="rounded-lg" src="img/channels/redbulltv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Aljazeera" data-source="https://backend.plusbox.tv/Aljazeera/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="Aljazeera"><img alt="" class="rounded-lg" src="img/channels/aljazeera.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Bloomberg TV" data-source="https://backend.plusbox.tv/BloombergTV/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="BloombergTV"><img alt="" class="rounded-lg" src="img/channels/bloomberg.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Enterr 10" data-source="https://backend.plusbox.tv/Enterr10/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="Enterr10"><img alt="" class="rounded-lg" src="img/channels/enterr10.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Discovery HD" data-source="https://backend.plusbox.tv/DiscoveryHD/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="DiscoveryHD"><img alt="" class="rounded-lg" src="img/channels/discoveryhdworld.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Animal Planet" data-source="https://backend.plusbox.tv/AnimalPlanet/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="AnimalPlanet"><img alt="" class="rounded-lg" src="img/channels/animalplanet.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#PTV Sports" data-source="https://backend.plusbox.tv/PTVSports/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="PTVSports"><img alt="" class="rounded-lg" src="img/channels/ptvsports.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Sony TV HD" data-source="https://backend.plusbox.tv/SonyTVHD/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="SonyTVHD"><img alt="" class="rounded-lg" src="img/channels/sonytv.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Sony Aath" data-source="https://backend.plusbox.tv/SonyAath/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="SonyAath"><img alt="" class="rounded-lg" src="img/channels/sonyaath.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Sony Max HD" data-source="https://backend.plusbox.tv/SonyMaxHD/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="SonyMaxHD"><img alt="" class="rounded-lg" src="img/channels/sonymaxhd.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Sony Ten 1 HD" data-source="https://backend.plusbox.tv/SonyTen1HD/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="SonyTen1HD"><img alt="" class="rounded-lg" src="img/channels/ten1.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Sony Ten 2 HD" data-source="https://backend.plusbox.tv/SonyTen2HD/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="SonyTen2HD"><img alt="" class="rounded-lg" src="img/channels/ten2.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Sony Ten 3 HD" data-source="https://backend.plusbox.tv/SonyTen3HD/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="SonyTen3HD"><img alt="" class="rounded-lg" src="img/channels/ten3.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Star Sports 1 HD" data-source="https://backend.plusbox.tv/StarSports1HD/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="StarSports1HD"><img alt="" class="rounded-lg" src="img/channels/starsports1hd.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Star Sports 2 HD" data-source="https://backend.plusbox.tv/StarSports2HD/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="StarSports2HD"><img alt="" class="rounded-lg" src="img/channels/starsports2hd.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Star Sports Select 1" data-source="https://backend.plusbox.tv/StarSportsSelect1/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="StarSportsSelect1"><img alt="" class="rounded-lg" src="img/channels/starsportsselect1.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Star Sports Select 2" data-source="https://backend.plusbox.tv/StarSportsSelect2/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="StarSportsSelect2"><img alt="" class="rounded-lg" src="img/channels/starsportsselect2.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#BTSports Espn" data-source="https://backend.plusbox.tv/BTSportsEspn/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="BTSportsEspn"><img alt="" class="rounded-lg" src="img/channels/btsportsespn.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#UNITE8Sports1" data-source="https://backend.plusbox.tv/UNITE8Sports1/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="UNITE8Sports1"><img alt="" class="rounded-lg" src="img/channels/uni8.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Star Jalsha HD" data-source="https://backend.plusbox.tv/StarJalshaHD/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="StarJalshaHD"><img alt="" class="rounded-lg" src="img/channels/starjalshahd.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Star Gold HD" data-source="https://backend.plusbox.tv/StarGoldHD/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="StarGoldHD"><img alt="" class="rounded-lg" src="img/channels/stargoldhd.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Zee Bangla HD" data-source="https://backend.plusbox.tv/ZeeBanglaHD/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="ZeeBanglaHD"><img alt="" class="rounded-lg" src="img/channels/zeebanglahd.png"></a>
+                              </div><div>
+                                <a class="playignitor thumbnail" onclick="startChannel(this)" href="#Zee Cinema HD" data-source="https://backend.plusbox.tv/ZeeCinemaHD/embed.html?mute=false&autoplay=true&volume=50&token="  data-name="ZeeCinemaHD"><img alt="" class="rounded-lg" src="img/channels/zeecinemahd.png"></a>
+                              </div>                </div>
+            </div>
         </div>
+        <p class="m-0 text-center text-white">Total Visitors: <span class="font-weight-bold" style="color:#fff200">29856</span></p>
 
-        <div class="search-box">
-            <input
-                type="search"
-                id="search"
-                placeholder="Search channels..."
-                autocomplete="off"
-            >
-        </div>
-
+        <p id="credit" class="m-0 text-center text-white">Made with <i class="fas fa-heart animate__infinite animate__animated animate__pulse" style="color:#DD1C52"></i> by <a href="https://kodevite.com" class="text-decoration-none font-weight-bold" style="color: #fff200;" target="_blank">KODEVITE</a></p>
     </div>
-</header>
+</section>
 
+<!--Added by Mishu Starts-->
 
-<div class="filters">
-    <div class="filter-row" id="genreFilters">
-        <button class="filter-btn active" data-genre="all">
-            All
-        </button>
-    </div>
-</div>
+<!-- Including jQuery and Bootstrap JS -->
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<!-- <script src="js/jquery.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 
 
-<div class="channel-info">
-    <span id="channelCount">Loading channels...</span>
-</div>
 
 
-<div id="loading" class="loading">
-    <div class="spinner"></div>
-    Loading channels...
-</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.2.1/bloodhound.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.2.1/typeahead.jquery.min.js"></script>-->
 
 
-<div id="channelGrid" class="channel-grid"></div>
+<!-- Include Handlebars from a CDN -->
+<!--<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.runtime.js"></script>-->
 
 
-<script>
+<!-- Including js for Slick -->
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<!-- Including Custom JS -->
+<script src="js/main.js"></script>
+<!--Added by Mishu Ends-->
 
-const DATA_URL =
-    "https://gist.githubusercontent.com/mitthu786/6719418610aa81997e72d6c27a6a2e39/raw/tsjiotvnew.json";
 
-const PLAY_PAGE = "play.html";
 
-let channels = [];
-let activeGenre = "all";
-let searchText = "";
 
 
-/*
-|--------------------------------------------------------------------------
-| Load JSON
-|--------------------------------------------------------------------------
-*/
 
-async function loadChannels() {
-    const loading = document.getElementById("loading");
 
-    try {
-        const response = await fetch(DATA_URL, {
-            cache: "no-store"
-        });
 
-        if (!response.ok) {
-            throw new Error("HTTP " + response.status);
-        }
 
-        const data = await response.json();
-
-        if (!Array.isArray(data)) {
-            throw new Error("Invalid JSON format");
-        }
-
-        channels = data;
-        loading.style.display = "none";
-
-        createGenreFilters();
-        renderChannels();
-
-    } catch (error) {
-        console.error(error);
-
-        loading.innerHTML = `
-            <div style="font-size:35px;margin-bottom:10px;">⚠️</div>
-            <div>Unable to load channels.</div>
-            <div style="font-size:12px;margin-top:8px;color:#666;">
-                Please try again later.
-            </div>
-        `;
-    }
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Create Genre Filters
-|--------------------------------------------------------------------------
-*/
-
-function createGenreFilters() {
-    const container = document.getElementById("genreFilters");
-
-    const genres = [
-        ...new Set(
-            channels
-                .map(channel => channel.genre)
-                .filter(Boolean)
-        )
-    ].sort();
-
-    genres.forEach(genre => {
-        const button = document.createElement("button");
-        button.className = "filter-btn";
-        button.dataset.genre = genre;
-        button.textContent = genre;
-
-        button.addEventListener("click", () => {
-            activeGenre = genre;
-
-            document
-                .querySelectorAll(".filter-btn")
-                .forEach(btn => btn.classList.remove("active"));
-
-            button.classList.add("active");
-            renderChannels();
-        });
-
-        container.appendChild(button);
-    });
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Clean Image URL
-|--------------------------------------------------------------------------
-*/
-
-function cleanImageUrl(url) {
-    if (!url) return "";
-
-    url = String(url).trim();
-
-    const markdown = url.match(/^\[.*?\]\((https?:\/\/[^)]+)\)$/);
-    if (markdown) {
-        return markdown[1];
-    }
-
-    url = url.replace(/^\[/, "").replace(/\]$/, "");
-    return url;
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Filter Channels
-|--------------------------------------------------------------------------
-*/
-
-function getFilteredChannels() {
-    return channels.filter(channel => {
-        const genreMatch =
-            activeGenre === "all" ||
-            String(channel.genre || "").toLowerCase() === activeGenre.toLowerCase();
-
-        const searchTarget = [
-            channel.name,
-            channel.link2,
-            channel.genre,
-            channel.lang
-        ]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase();
-
-        const searchMatch =
-            !searchText || searchTarget.includes(searchText);
-
-        return genreMatch && searchMatch;
-    });
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Render Channels
-|--------------------------------------------------------------------------
-*/
-
-function renderChannels() {
-    const grid = document.getElementById("channelGrid");
-    const count = document.getElementById("channelCount");
-
-    const filtered = getFilteredChannels();
-
-    count.textContent = `${filtered.length} channel${filtered.length === 1 ? "" : "s"}`;
-    grid.innerHTML = "";
-
-    if (!filtered.length) {
-        grid.innerHTML = `<div class="empty">No channels found.</div>`;
-        return;
-    }
-
-    filtered.forEach(channel => {
-        const card = document.createElement("div");
-        card.className = "channel-card";
-
-        card.addEventListener("click", () => {
-            const channelId = channel.id || channel.channel_id;
-            if (!channelId) return;
-
-            window.location.href = `${PLAY_PAGE}?id=${encodeURIComponent(channelId)}`;
-        });
-
-        const imageUrl = cleanImageUrl(channel.img);
-        const name = channel.link2 || channel.name || "Unknown Channel";
-        const genre = channel.genre || "General";
-        const language = channel.lang || "";
-
-        card.innerHTML = `
-            <div class="channel-logo">
-                ${
-                    imageUrl
-                    ? `<img
-                        src="${escapeHtml(imageUrl)}"
-                        alt="${escapeHtml(name)}"
-                        loading="lazy"
-                        onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
-                    >`
-                    : ""
-                }
-                <div class="placeholder" style="${imageUrl ? "display:none" : ""}">
-                    No Logo
-                </div>
-            </div>
-
-            <div class="channel-details">
-                <div class="channel-name" title="${escapeHtml(name)}">
-                    ${escapeHtml(name)}
-                </div>
-
-                <div class="channel-meta">
-                    <span class="tag">${escapeHtml(genre)}</span>
-                    ${language ? `<span class="tag">${escapeHtml(language)}</span>` : ""}
-                    ${String(channel.catchup) === "1" ? `<span class="tag catchup">Catch-up</span>` : ""}
-                </div>
-            </div>
-        `;
-
-        grid.appendChild(card);
-    });
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Search
-|--------------------------------------------------------------------------
-*/
-
-document.getElementById("search").addEventListener("input", function () {
-    searchText = this.value.trim().toLowerCase();
-    renderChannels();
-});
-
-
-/*
-|--------------------------------------------------------------------------
-| HTML Escaping
-|--------------------------------------------------------------------------
-*/
-
-function escapeHtml(value) {
-    return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Start
-|--------------------------------------------------------------------------
-*/
-
-loadChannels();
-
-</script>
-
-</body>
-</html>
