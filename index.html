@@ -4,9 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0c2620">
-<title>ALLINONE — Live Sports</title>
+<title>NowzyPlay — Live Sports</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.11.2/shaka-player.compiled.js"></script>
 <style>
 :root{color-scheme:dark;--bg:#0c2620;--bg2:#0a1f1a;--card:#12342b;--card2:#163d32;--line:#24513f;--text:#f3efe2;--muted:#9fb8aa;--brass:#e8b44a;--ball:#e5484d;--sky:#7cc7e8}
 *{box-sizing:border-box}
@@ -19,13 +20,32 @@ h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",sans-serif;margin:0;lette
 /* header */
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:18px 0;border-bottom:1px solid var(--line)}
 .brand{font:700 30px/1 "Barlow Condensed",sans-serif;letter-spacing:1px}
-.brand span{color:var(--brass);margin-left:6px}
+.brand span{color:var(--brass);margin-left:2px}
 .scorebar{display:flex;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg2)}
 .score{padding:8px 18px;border-right:1px solid var(--line);text-align:center;min-width:84px}
 .score strong{display:block;font:700 24px/1.1 "Barlow Condensed",sans-serif}
 .score span{font-size:11px;color:var(--muted)}
 .score.live strong{color:var(--ball)}.score.up strong{color:var(--brass)}.score.ch strong{color:var(--sky)}
 .updated{padding:8px 14px;font-size:12px;color:var(--muted);align-self:center;white-space:nowrap}
+
+/* inline player stage */
+.player-stage{display:none;margin:20px 0 6px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 20px 50px #0006}
+.player-stage.active{display:block}
+.player-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:var(--card2);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.player-meta{display:flex;align-items:center;gap:10px;min-width:0}
+.player-title{font:700 22px/1.1 "Barlow Condensed",sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player-channel{font-size:12px;font-weight:600;color:var(--brass);background:#e8b44a1a;border:1px solid #8a6a2a;border-radius:6px;padding:3px 8px;white-space:nowrap}
+.player-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.source-pills{display:flex;gap:6px;flex-wrap:wrap}
+.source-pill{background:var(--bg2);color:var(--muted);border:1px solid var(--line);border-radius:7px;padding:5px 10px;font-size:12px;font-weight:600}
+.source-pill:hover{color:var(--text);border-color:var(--brass)}
+.source-pill.active{background:var(--brass);color:#2a1c04;border-color:var(--brass)}
+.close-player{background:#ffffff12;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:5px 11px;font-size:13px;font-weight:600}
+.close-player:hover{border-color:var(--ball);color:#ff8085}
+.video-wrap{position:relative;width:100%;aspect-ratio:16/9;max-height:74vh;background:#000}
+.video-wrap video{width:100%;height:100%;display:block;background:#000}
+.player-status{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;gap:8px;background:#000c;color:var(--text);text-align:center;padding:20px;pointer-events:none}
+.player-status.visible{display:flex}
 
 /* controls */
 .controls{display:grid;grid-template-columns:minmax(220px,460px) 220px;gap:12px;padding:20px 0 12px}
@@ -36,7 +56,6 @@ h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",sans-serif;margin:0;lette
 .chip:hover{color:var(--text);border-color:#3d7a62}
 .chip.active{background:var(--brass);border-color:var(--brass);color:#2a1c04;font-weight:600}
 .chip.cricket:not(.active){border-color:#8a6a2a;color:var(--brass)}
-.divider{flex:0 0 1px;background:var(--line);margin:4px 4px}
 
 /* sections */
 .section-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:22px 0 4px}
@@ -50,16 +69,11 @@ h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",sans-serif;margin:0;lette
 .group:after{content:"";flex:1;height:1px;background:var(--line)}
 .group small{color:var(--muted);font-size:13px;order:3}
 
-
-/* smooth entrance when cards load */
-.card{animation:cardIn .55s cubic-bezier(.22,.8,.25,1) backwards;animation-delay:calc(var(--i,0)*45ms)}
+/* card */
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:border-color .2s,transform .2s;animation:cardIn .55s cubic-bezier(.22,.8,.25,1) backwards;animation-delay:calc(var(--i,0)*45ms)}
 .group{animation:softIn .5s ease-out backwards;animation-delay:calc(var(--i,0)*45ms)}
 @keyframes cardIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
 @keyframes softIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
-.loading,.empty,.error{animation:softIn .45s ease-out}
-
-/* card */
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:border-color .2s,transform .2s}
 .card.live-match{cursor:pointer;border-left:4px solid var(--ball)}
 .card.live-match:hover{border-color:var(--brass);transform:translateY(-2px)}
 .card.non-live{cursor:not-allowed;opacity:.8}
@@ -106,14 +120,12 @@ h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",sans-serif;margin:0;lette
   .section-head h2{font-size:26px}
 }
 @media(max-width:380px){.grid{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
-<script data-cfasync="false" src="https://capitalhospitals.org/1/b2962c08c3ad508acb1f5844f2e0ab8c"></script>
 <body>
 <div class="wrap">
   <header class="topbar">
-    <div class="brand">ALLINONE<span>SPORTS</span></div>
+    <div class="brand">NOWZY<span>PLAY</span></div>
     <div class="scorebar">
       <div class="score"><strong id="matchCount">—</strong><span>Matches</span></div>
       <div class="score live"><strong id="liveCount">—</strong><span>Live</span></div>
@@ -122,6 +134,25 @@ h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",sans-serif;margin:0;lette
     </div>
     <div class="updated" id="updatedPill">● Connecting…</div>
   </header>
+
+  <!-- Inline Autoplay Video Player -->
+  <section class="player-stage" id="playerStage" aria-label="Live stream player">
+    <div class="player-head">
+      <div class="player-meta">
+        <span class="status live"><i class="dot"></i> LIVE</span>
+        <h2 class="player-title" id="playerTitle">Match Stream</h2>
+        <span class="player-channel" id="playerChannel">Channel</span>
+      </div>
+      <div class="player-actions">
+        <div class="source-pills" id="playerSources"></div>
+        <button class="close-player" id="closePlayer" type="button">✕ Close</button>
+      </div>
+    </div>
+    <div class="video-wrap">
+      <video id="videoPlayer" controls autoplay playsinline></video>
+      <div class="player-status" id="playerStatus"></div>
+    </div>
+  </section>
 
   <div class="controls">
     <div class="searchbox"><input id="search" type="search" placeholder="Search teams, leagues, channels…" autocomplete="off" aria-label="Search"></div>
@@ -136,26 +167,28 @@ h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",sans-serif;margin:0;lette
   </nav>
   <nav class="chips" id="categoryTabs" aria-label="Sport categories"><button class="chip active" data-category="ALL">All sports</button></nav>
 
-  <div class="section-head"><div><h2 id="sectionTitle">All matches</h2><p>Choose a match to open available streams.</p></div><div class="results" id="resultCount">Loading events…</div></div>
+  <div class="section-head"><div><h2 id="sectionTitle">All matches</h2><p>Click a live match to load and autoplay its stream.</p></div><div class="results" id="resultCount">Loading events…</div></div>
   <main class="grid" id="grid"><div class="loading"><strong>Loading the match centre…</strong>Fetching the latest sports data.</div></main>
-  <footer class="footer">ALLINONE · SPORTS</footer>
+  <footer class="footer">NOWZYPLAY · LIVE SPORTS</footer>
 </div>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
-/* ================= USER CONFIG =================
-   Set this to your existing player page.
-================================================== */
-const PLAYER_PAGE = "player.html";
 const DATA_URL = "https://raw.githubusercontent.com/sm-monirulislam/Upcoming-and-Live-Sports-Data/main/Sports_data.json";
-const PRIORITY_CATEGORY = "cricket"; // shown first everywhere
+const PRIORITY_CATEGORY = "cricket";
 
 const $ = s => document.querySelector(s);
 const grid = $("#grid");
+const videoEl = $("#videoPlayer");
+const playerStage = $("#playerStage");
+const playerStatus = $("#playerStatus");
+
 let allMatches = [];
 let activeCategory = "ALL";
 let activeStatus = "ALL";
 let toastTimer;
+let shakaPlayer = null;
+
 const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function safeUrl(value){try{const u=new URL(value);return ["http:","https:"].includes(u.protocol)?u.href:""}catch{return ""}}
 function matchStatus(m){
@@ -172,6 +205,7 @@ function eventInfo(m){return m.eventInfo||{}}
 function eventName(m){const i=eventInfo(m);return i.eventName||m.event_name||"Sports event"}
 function teamA(m){const i=eventInfo(m);return i.teamA||String(m.event_name||"").split(/\s+Vs\s+/i)[0]||eventName(m)}
 function teamB(m){const i=eventInfo(m);return i.teamB||String(m.event_name||"").split(/\s+Vs\s+/i)[1]||""}
+
 function teamLogoHtml(primary, fallback, teamName){
   const teamUrl = safeUrl(primary);
   const eventUrl = safeUrl(fallback);
@@ -182,21 +216,96 @@ function teamLogoHtml(primary, fallback, teamName){
   const second = teamUrl && eventUrl && teamUrl !== eventUrl ? eventUrl : "";
   return `<img src="${esc(first)}" alt="${esc(teamName)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-fallback="${esc(second)}" onerror="if(this.dataset.fallback){const next=this.dataset.fallback;this.dataset.fallback='';this.src=next}else{this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='flex'}">${fallbackHtml}`;
 }
-function buildPlayerUrl(match, stream, index){
-  const params = new URLSearchParams();
-  params.set("url", stream.stream_url);
-  params.set("name", stream.channel_name || "Live stream");
-  params.set("title", match.event_name || eventName(match));
-  params.set("category", match.Category || "");
-  if(stream.kid) params.set("kid", stream.kid);
-  if(stream.key) params.set("key", stream.key);
-  if(stream.user_agent) params.set("user_agent", stream.user_agent);
-  if(stream.referer) params.set("referer", stream.referer);
-  params.set("type", /\.mpd(?:$|\?)/i.test(stream.stream_url) ? "mpd" : "hls");
-  return PLAYER_PAGE + "?" + params.toString();
+
+function showToast(message){
+  const t=$("#toast");
+  t.textContent=message;
+  t.style.display="block";
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.style.display="none",2800);
 }
-function showToast(message){const t=$("#toast");t.textContent=message;t.style.display="block";clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.style.display="none",2800)}
+
+function setPlayerOverlay(text){
+  if(!text){
+    playerStatus.classList.remove("visible");
+    playerStatus.innerHTML = "";
+    return;
+  }
+  playerStatus.innerHTML = text;
+  playerStatus.classList.add("visible");
+}
+
+/* ================= INLINE PLAYER ENGINE ================= */
+async function initShaka(){
+  if(shakaPlayer) return shakaPlayer;
+  if(window.shaka){
+    shaka.polyfill.installAll();
+    if(shaka.Player.isBrowserSupported()){
+      shakaPlayer = new shaka.Player();
+      await shakaPlayer.attach(videoEl);
+      shakaPlayer.addEventListener("error", e => {
+        console.error("Shaka error:", e.detail);
+        setPlayerOverlay(`<strong>Stream playback error</strong><span>Try switching to another source button above.</span>`);
+      });
+    }
+  }
+  return shakaPlayer;
+}
+
+async function playStream(match, sources, sourceIndex = 0){
+  const stream = sources[sourceIndex];
+  if(!stream) return;
+
+  playerStage.classList.add("active");
+  $("#playerTitle").textContent = match.event_name || eventName(match);
+  $("#playerChannel").textContent = (stream.channel_name || `Source ${sourceIndex + 1}`).trim();
+
+  const pillBox = $("#playerSources");
+  pillBox.innerHTML = sources.map((s, idx) =>
+    `<button type="button" class="source-pill ${idx === sourceIndex ? "active" : ""}" data-src-idx="${idx}">${esc((s.channel_name || `Source ${idx + 1}`).trim())}</button>`
+  ).join("");
+  pillBox.querySelectorAll("[data-src-idx]").forEach(btn => {
+    btn.addEventListener("click", () => playStream(match, sources, Number(btn.dataset.srcIdx)));
+  });
+
+  playerStage.scrollIntoView({ behavior: "smooth", block: "start" });
+  setPlayerOverlay("<strong>Loading stream…</strong>");
+
+  try {
+    const player = await initShaka();
+    if(player){
+      await player.unload();
+      await player.load(stream.stream_url);
+    } else {
+      videoEl.src = stream.stream_url;
+    }
+
+    setPlayerOverlay("");
+    try {
+      await videoEl.play();
+    } catch (autoplayErr) {
+      videoEl.muted = true;
+      await videoEl.play();
+      showToast("Muted for autoplay — click the volume icon to unmute.");
+    }
+  } catch (err) {
+    console.error("Playback failed:", err);
+    setPlayerOverlay(`<strong>Could not load this stream</strong><span>Select another source from the top bar if available.</span>`);
+  }
+}
+
+async function closePlayer(){
+  if(shakaPlayer) await shakaPlayer.unload();
+  videoEl.pause();
+  videoEl.removeAttribute("src");
+  videoEl.load();
+  playerStage.classList.remove("active");
+}
+$("#closePlayer").addEventListener("click", closePlayer);
+
+/* ================= MATCH CARDS & FILTERING ================= */
 function timeText(m){const i=eventInfo(m);return i.startTime||"Time not listed"}
+
 function cardHtml(m,index){
   const i=eventInfo(m), status=matchStatus(m), live=status==="LIVE", streams=live?validStreams(m):[];
   const a=teamA(m), b=teamB(m), logo=safeUrl(i.event_logo), flagA=safeUrl(i.teamAFlag), flagB=safeUrl(i.teamBFlag);
@@ -219,10 +328,11 @@ function cardHtml(m,index){
       <div class="league">${esc(eventName(m))}</div>
       <div class="meta">◷ ${esc(timeText(m))}</div>
       <div class="stream-row"><div class="stream-count ${none?"none":""}">${sourceLabel}</div>
-      <button class="watch" data-open="${index}" ${disabled?"disabled":""}>${!live?status:(streams.length?"CHOOSE STREAM":"NO STREAM AVAILABLE")}</button></div>
+      <button class="watch" data-open="${index}" ${disabled?"disabled":""}>WATCH</button></div>
     </div>
   </article>`;
 }
+
 function getFiltered(){
   const q=$("#search").value.trim().toLowerCase();
   let rows=allMatches.map((m,index)=>({m,index})).filter(({m})=>{
@@ -236,20 +346,24 @@ function getFiltered(){
   if(sort==="name") rows.sort((a,b)=>String(a.m.event_name||"").localeCompare(String(b.m.event_name||"")));
   return rows;
 }
+
 function openMatch(match){
   if(!match || !isLive(match)) return;
   const sources=validStreams(match);
   if(!sources.length) return;
-  if(sources.length===1){window.open(buildPlayerUrl(match,sources[0],0),"_blank","noopener");return}
-  showStreamPicker(match,sources);
+  if(sources.length===1){
+    playStream(match, sources, 0);
+    return;
+  }
+  showStreamPicker(match, sources);
 }
+
 function render(){
   const rows=getFiltered();
   $("#sectionTitle").textContent=(activeStatus==="LIVE"?"Live now":activeStatus==="UPCOMING"?"Upcoming matches":activeStatus==="ENDED"?"Ended matches":"All matches")+(activeCategory==="ALL"?"":" · "+activeCategory);
   document.querySelectorAll(".status-tab").forEach(b=>b.classList.toggle("active",b.dataset.status===activeStatus));
   $("#resultCount").textContent=`${rows.length} event${rows.length===1?"":"s"}`;
   if(!rows.length){grid.innerHTML='<div class="empty"><strong>No matches found</strong>Try another search or select a different sport or status.</div>';return}
-  // Cricket first (stable: keeps the chosen sort inside each group)
   const cricket=rows.filter(r=>isCricket(r.m)), rest=rows.filter(r=>!isCricket(r.m));
   let html="";
   if(activeCategory==="ALL" && cricket.length && rest.length){
@@ -265,13 +379,14 @@ function render(){
     openMatch(allMatches[Number(btn.dataset.open)]);
   }));
 }
+
 function showStreamPicker(match,sources){
   const overlay=document.createElement("div");
   overlay.style.cssText="position:fixed;inset:0;z-index:50;background:#030d0bd9;backdrop-filter:blur(10px);display:grid;place-items:center;padding:18px";
   const panel=document.createElement("section");
   panel.style.cssText="width:min(560px,100%);max-height:85vh;overflow:auto;background:#12342b;border:1px solid #24513f;border-radius:16px;padding:22px;box-shadow:0 30px 100px #0009;color:#f3efe2";
   const title=document.createElement("h2");title.textContent=match.event_name||eventName(match);title.style.cssText="font-size:26px;margin:0 0 4px";
-  const sub=document.createElement("p");sub.textContent="Select a stream source to open it in your player.";sub.style.cssText="color:#9fb8aa;font-size:14px;margin:0 0 14px";
+  const sub=document.createElement("p");sub.textContent="Select a stream source to autoplay.";sub.style.cssText="color:#9fb8aa;font-size:14px;margin:0 0 14px";
   const close=document.createElement("button");close.textContent="✕";close.setAttribute("aria-label","Close");close.style.cssText="float:right;background:#ffffff12;color:white;border:1px solid #ffffff1c;border-radius:9px;padding:7px 10px";
   close.onclick=()=>overlay.remove();
   panel.append(close,title,sub);
@@ -281,14 +396,17 @@ function showStreamPicker(match,sources){
     b.textContent=(s.channel_name||`Source ${i+1}`).trim()+`  ·  ${isDash?"DASH":"HLS"}`;
     b.style.cssText="display:block;width:100%;text-align:left;margin:8px 0;padding:14px;border:1px solid #24513f;border-radius:10px;background:#163d32;color:#f3efe2;font-weight:600;cursor:pointer";
     b.onmouseenter=()=>b.style.borderColor="#e8b44a";b.onmouseleave=()=>b.style.borderColor="#24513f";
-    b.onclick=()=>{const url=buildPlayerUrl(match,s,i);const win=window.open(url,"_blank","noopener");if(!win)showToast("Pop-up blocked. Allow pop-ups for this site.");overlay.remove()};
+    b.onclick=()=>{
+      overlay.remove();
+      playStream(match, sources, i);
+    };
     panel.appendChild(b);
   });
   overlay.addEventListener("click",e=>{if(e.target===overlay)overlay.remove()});
   overlay.appendChild(panel);document.body.appendChild(overlay);
 }
+
 function renderCategories(){
-  // Cricket tab first, then the rest A–Z
   const cats=[...new Set(allMatches.map(m=>m.Category||"Other"))].sort((a,b)=>{
     const ca=a.toLowerCase()===PRIORITY_CATEGORY, cb=b.toLowerCase()===PRIORITY_CATEGORY;
     return ca!==cb ? (ca?-1:1) : a.localeCompare(b);
@@ -302,6 +420,7 @@ function renderCategories(){
     renderCategories();render();
   }));
 }
+
 async function loadData(){
   try{
     const response=await fetch(DATA_URL,{cache:"no-store"});
@@ -317,10 +436,11 @@ async function loadData(){
     $("#updatedPill").textContent=data.last_update_time?("● Updated "+data.last_update_time):"● Data loaded";
     renderCategories();render();
   }catch(err){
-    grid.innerHTML=`<div class="error"><strong>Could not load sports data</strong><p>${esc(err.message||"Unknown error")}</p><button class="watch" onclick="loadData()">Try again</button><p>Open this page through a web server (for example XAMPP), not directly as a file, and check that the data URL is reachable.</p></div>`;
+    grid.innerHTML=`<div class="error"><strong>Could not load sports data</strong><p>${esc(err.message||"Unknown error")}</p><button class="watch" onclick="loadData()">Try again</button></div>`;
     $("#updatedPill").textContent="● Connection error";$("#resultCount").textContent="Data unavailable";
   }
 }
+
 $("#search").addEventListener("input",render);
 document.querySelectorAll(".status-tab").forEach(button=>button.addEventListener("click",()=>{
   activeStatus=button.dataset.status;
@@ -328,170 +448,6 @@ document.querySelectorAll(".status-tab").forEach(button=>button.addEventListener
 }));
 $("#sortFilter").addEventListener("change",render);
 loadData();
-</script>
-
-<!-- Anti-Adblock Popup -->
-<div class="adb" id="adb" style="display: none;">
-  <div class="adbs">
-    <h3>Adblock/Brave Shields Detected</h3>
-    <p>Please disable your adblocker or Brave Shields to continue browsing this site.</p>
-  </div>
-</div>
-
-<style>
-.adb {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  background: rgba(0, 0, 0, 0.85);
-  z-index: 99999;
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-.adbs {
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
-  text-align: center;
-  max-width: 400px;
-  width: 90%;
-}
-@keyframes glow {
-  from { text-shadow: 0 0 0px #ff0000; }
-  to { text-shadow: 0 0 1px #ff0000; }
-}
-.adbs h3 {
-  color: #d00;
-  font-size: 24px;
-  margin-bottom: 15px;
-}
-.adbs p {
-  font-size: 16px;
-  color: #333;
-}
-</style>
-
-<script>
-// ----------------- Popup Function -----------------
-function showPopup(reason = "Adblock Detected") {
-  document.getElementById("adb").style.display = "flex";
-  document.querySelector("#adb .adbs h3").innerText = reason;
-
-  if (reason.includes("Brave")) {
-  document.querySelector("#adb .adbs p").innerHTML = `
-    Please disable Brave Shields (click Brave logo → toggle Shields off) to continue browsing.<br>
-    <span style="
-      color: #ff0000;
-      font-weight: bold;
-      animation: glow 1s ease-in-out infinite alternate;
-    ">
-      If still showing message after disabling please reload page
-    </span>
-  `;
-}
-  console.warn("⚠️ Popup Triggered:", reason);
-}
-
-// ----------------- PC Browser Adblock Detection -----------------
-async function detectAdblock() {
-  let detected = false;
-
-  // bait div
-  const bait = document.createElement("div");
-  bait.className = "ad adsbox ad-banner adsense ad-container sponsored";
-  bait.style.cssText = "width:1px;height:1px;position:absolute;left:-9999px;top:-9999px;";
-  document.body.appendChild(bait);
-
-  // bait img
-  const img = document.createElement("img");
-  img.src = "https://pagead2.googlesyndication.com/pagead/imgad?id=CAASFeDxyz";
-  img.style.cssText = "width:1px;height:1px;position:absolute;left:-9999px;top:-9999px;";
-  img.onerror = () => { detected = true; };
-  document.body.appendChild(img);
-
-  // bait iframe
-  const iframe = document.createElement("iframe");
-  iframe.src = "https://googleads.g.doubleclick.net/pagead/html/r2023/sample-ad.html";
-  iframe.style.cssText = "width:1px;height:1px;position:absolute;left:-9999px;top:-9999px;";
-  iframe.onerror = () => { detected = true; };
-  document.body.appendChild(iframe);
-
-  // bait script
-  const script = document.createElement("script");
-  script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
-  script.async = true;
-  script.onerror = () => { detected = true; };
-  document.head.appendChild(script);
-
-  await new Promise(resolve => setTimeout(resolve, 500));
-
-  if (
-    window.getComputedStyle(bait).display === "none" ||
-    bait.offsetHeight === 0 ||
-    bait.offsetParent === null
-  ) {
-    detected = true;
-  }
-
-  bait.remove();
-  img.remove();
-  iframe.remove();
-  script.remove();
-
-  return detected;
-}
-
-// ----------------- Brave Shields Detection -----------------
-async function detectBraveShields() {
-  try {
-    let res = await fetch("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", {
-      method: "GET",
-      cache: "no-store",
-      mode: "no-cors"
-    });
-
-    if (res.type === "opaque") {
-      try {
-        const buf = await res.clone().arrayBuffer();
-        console.log("🟡 Brave Response Size:", buf.byteLength);
-
-        // Corrected Logic:
-        // Size < 100 = Shields OFF
-        // Size >= 100 = Shields ON
-        if (buf.byteLength < 100) {
-          return false; // Shields OFF
-        } else {
-          return true;  // Shields ON
-        }
-      } catch (e) {
-        console.warn("🟡 Brave fetch blocked", e);
-        return true; // Shields ON
-      }
-    }
-    return true; // default treat as ON
-  } catch (e) {
-    console.error("🛑 Brave Shields hard blocked", e);
-    return true; // Shields ON
-  }
-}
-
-// ----------------- Main -----------------
-window.addEventListener("load", async () => {
-  const shieldsOn = await detectBraveShields();
-  if (shieldsOn) {
-    showPopup("Brave Shields Detected");
-    return;
-  }
-
-  const adblocker = await detectAdblock();
-  if (adblocker) {
-    showPopup("Adblock Detected");
-  }
-});
 </script>
 </body>
 </html>
