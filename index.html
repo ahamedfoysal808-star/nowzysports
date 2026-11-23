@@ -1,453 +1,178 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0c2620">
-<title>NowzyPlay — Live Sports</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.11.2/shaka-player.compiled.js"></script>
-<style>
-:root{color-scheme:dark;--bg:#0c2620;--bg2:#0a1f1a;--card:#12342b;--card2:#163d32;--line:#24513f;--text:#f3efe2;--muted:#9fb8aa;--brass:#e8b44a;--ball:#e5484d;--sky:#7cc7e8}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 Barlow,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;background-image:repeating-linear-gradient(90deg,transparent 0 79px,#ffffff05 79px 80px)}
-button,input,select{font:inherit}button{cursor:pointer}
-.wrap{width:100%;max-width:1680px;margin:0 auto;padding:0 clamp(14px,3vw,48px)}
-h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",sans-serif;margin:0;letter-spacing:.2px}
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Webcric – Free Live Cricket Streaming Online</title>
+<meta name="description" content="Free live cricket streaming online on Webcric: India vs New Zealand, Australia vs England and more this month, in your browser, no app, no sign-up.">
+<meta property="og:site_name" content="Webcric">
+<link rel="canonical" href="https://webcric.is/">
+<meta name="theme-color" content="#0f8a5f">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Webcric","url":"https://webcric.is/","description":"Live cricket streaming that plays in any web browser, free and without sign-up."}
+</script>
 
-/* header */
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:18px 0;border-bottom:1px solid var(--line)}
-.brand{font:700 30px/1 "Barlow Condensed",sans-serif;letter-spacing:1px}
-.brand span{color:var(--brass);margin-left:2px}
-.scorebar{display:flex;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg2)}
-.score{padding:8px 18px;border-right:1px solid var(--line);text-align:center;min-width:84px}
-.score strong{display:block;font:700 24px/1.1 "Barlow Condensed",sans-serif}
-.score span{font-size:11px;color:var(--muted)}
-.score.live strong{color:var(--ball)}.score.up strong{color:var(--brass)}.score.ch strong{color:var(--sky)}
-.updated{padding:8px 14px;font-size:12px;color:var(--muted);align-self:center;white-space:nowrap}
+    <!-- Link to CSS using base URL -->
+    <link rel="stylesheet" href="/cdn/css/style.css?id=1794511790">
+    <style id="site-theme">:root{--brand:#0f8a5f;--brand-rgb:15, 138, 95;--brand-text:#0b6e4b;--brand-hover:#0a5f41;--brand-tint:#e8f6f0;--heading:#10332a;--brand-on-dark:#3fc48f;--brand-on-dark-rgb:63, 196, 143;--brand-text-on-dark:#6fd4a8;--brand-tint-on-dark:#1d3329;--brand-tint-on-dark-soft:#172820;--accent:#c95a12;--accent-hover:#a84a0e;--notice-tint:#fff4e8;--notice-stripe:#e67e22;--notice-tint-on-dark:#2b2118;--notice-stripe-on-dark:#e08a3c;--tv-brand:#1a9a6c;--tv-brand-strong:#0e6e4c;}</style>
+    <link rel="stylesheet" href="/cdn/css/style-dark.css?id=1791836258" media="(prefers-color-scheme: dark)" id="theme-dark">
+<script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light"){document.getElementById("theme-dark").media=t==="dark"?"all":"not all";}}catch(e){}})();</script>
+    <script>(function(d,u){if(/iPhone|iPad|iPod/.test(u)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1))d.className+=" on-ios";else if(/Android/.test(u))d.className+=" on-android";})(document.documentElement,navigator.userAgent);</script>
 
-/* inline player stage */
-.player-stage{display:none;margin:20px 0 6px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 20px 50px #0006}
-.player-stage.active{display:block}
-.player-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:var(--card2);border-bottom:1px solid var(--line);flex-wrap:wrap}
-.player-meta{display:flex;align-items:center;gap:10px;min-width:0}
-.player-title{font:700 22px/1.1 "Barlow Condensed",sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.player-channel{font-size:12px;font-weight:600;color:var(--brass);background:#e8b44a1a;border:1px solid #8a6a2a;border-radius:6px;padding:3px 8px;white-space:nowrap}
-.player-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.source-pills{display:flex;gap:6px;flex-wrap:wrap}
-.source-pill{background:var(--bg2);color:var(--muted);border:1px solid var(--line);border-radius:7px;padding:5px 10px;font-size:12px;font-weight:600}
-.source-pill:hover{color:var(--text);border-color:var(--brass)}
-.source-pill.active{background:var(--brass);color:#2a1c04;border-color:var(--brass)}
-.close-player{background:#ffffff12;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:5px 11px;font-size:13px;font-weight:600}
-.close-player:hover{border-color:var(--ball);color:#ff8085}
-.video-wrap{position:relative;width:100%;aspect-ratio:16/9;max-height:74vh;background:#000}
-.video-wrap video{width:100%;height:100%;display:block;background:#000}
-.player-status{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;gap:8px;background:#000c;color:var(--text);text-align:center;padding:20px;pointer-events:none}
-.player-status.visible{display:flex}
 
-/* controls */
-.controls{display:grid;grid-template-columns:minmax(220px,460px) 220px;gap:12px;padding:20px 0 12px}
-.searchbox input,select{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:13px 15px;color:var(--text);outline:none;font-size:15px}
-.searchbox input:focus,select:focus{border-color:var(--brass);box-shadow:0 0 0 3px #e8b44a22}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:thin}
-.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--bg2);color:var(--muted);border-radius:8px;padding:9px 15px;font-size:14px;font-weight:500;transition:background .15s,color .15s,border-color .15s}
-.chip:hover{color:var(--text);border-color:#3d7a62}
-.chip.active{background:var(--brass);border-color:var(--brass);color:#2a1c04;font-weight:600}
-.chip.cricket:not(.active){border-color:#8a6a2a;color:var(--brass)}
+<link rel="shortcut icon" href="/cdn/images/icons/icon-192x192.png?id=1791544128">
+<link rel="icon" href="/cdn/images/icons/icon-192x192.png?id=1791544128">
 
-/* sections */
-.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:22px 0 4px}
-.section-head h2{font-size:32px}
-.section-head p{margin:2px 0 0;color:var(--muted);font-size:14px}
-.results{color:var(--muted);font-size:14px;white-space:nowrap}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;padding-bottom:50px}
-.group{grid-column:1/-1;display:flex;align-items:center;gap:14px;margin:14px 0 0}
-.group h3{font-size:24px;color:var(--brass)}
-.group.rest h3{color:var(--text)}
-.group:after{content:"";flex:1;height:1px;background:var(--line)}
-.group small{color:var(--muted);font-size:13px;order:3}
+<link rel="manifest" href="/manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Webcric" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link rel="apple-touch-icon" sizes="180x180" href="/cdn/images/icons/icon-192x192.png?id=1791544128">
+<link rel="apple-touch-icon" sizes="167x167" href="/cdn/images/icons/icon-167x167.png?id=1791544128">
+<link rel="apple-touch-icon" sizes="152x152" href="/cdn/images/icons/icon-152x152.png?id=1791544128">
 
-/* card */
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:border-color .2s,transform .2s;animation:cardIn .55s cubic-bezier(.22,.8,.25,1) backwards;animation-delay:calc(var(--i,0)*45ms)}
-.group{animation:softIn .5s ease-out backwards;animation-delay:calc(var(--i,0)*45ms)}
-@keyframes cardIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
-@keyframes softIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
-.card.live-match{cursor:pointer;border-left:4px solid var(--ball)}
-.card.live-match:hover{border-color:var(--brass);transform:translateY(-2px)}
-.card.non-live{cursor:not-allowed;opacity:.8}
-.card.cricket-card.live-match{border-left-color:var(--brass)}
-.card-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;padding:18px 14px 14px;background:var(--card2);position:relative}
-.team{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0}
-.team img,.team .team-logo-fallback{width:52px;height:52px;object-fit:contain;border-radius:50%;flex:0 0 auto}
-.team .team-logo-fallback{display:none;align-items:center;justify-content:center;background:var(--bg2);border:1px solid var(--line);color:var(--brass);font:700 18px "Barlow Condensed",sans-serif}
-.team span{font-weight:600;font-size:14px;text-align:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.versus{font:700 14px "Barlow Condensed",sans-serif;color:var(--muted)}
-.badges{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;background:var(--card2);border-top:1px solid var(--line)}
-.status{font:600 12px Barlow,sans-serif;letter-spacing:.6px;padding:3px 9px;border-radius:6px;background:#ffffff12;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
-.status.live{background:#e5484d26;color:#ff8085}
-.status.upcoming{background:#7cc7e820;color:var(--sky)}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--ball);display:inline-block;animation:pulse 1.6s ease-in-out infinite}
-@keyframes pulse{50%{opacity:.35}}
-.category{font-size:12px;color:var(--brass);border:1px solid #8a6a2a;border-radius:6px;padding:3px 9px}
-.card-body{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
-.event-title{font-size:21px;line-height:1.15}
-.league{color:var(--muted);font-size:14px}
-.meta{color:var(--muted);font-size:13px;padding-top:6px}
-.stream-row{margin-top:auto;padding-top:12px;display:flex;justify-content:flex-end}
-.stream-count{font-size:13px;font-weight:600;color:#7be0a8;background:#0e3a2a;border:1px solid #1e6a49;border-radius:8px;padding:6px 11px}
-.stream-count.none{color:var(--muted);background:var(--bg2);border-color:var(--line)}
-.watch{display:none}
-.empty,.loading,.error{grid-column:1/-1;text-align:center;padding:56px 20px;border:1px dashed var(--line);border-radius:14px;color:var(--muted)}
-.empty strong,.loading strong,.error strong{display:block;color:var(--text);font:700 24px "Barlow Condensed",sans-serif;margin-bottom:6px}
-.error .watch{display:inline-block;background:var(--brass);color:#2a1c04;border:0;border-radius:8px;padding:10px 16px;font-weight:600;margin:8px 0}
-.footer{border-top:1px solid var(--line);padding:20px 0 30px;color:var(--muted);font-size:13px}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:12px 18px;background:var(--card2);border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 40px #0008;font-size:14px;z-index:60;display:none}
-:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
-@media(max-width:700px){
-  .chip{padding:8px 13px;font-size:13px}
-  .chips{gap:6px}
-  .brand{font-size:24px}
-  .controls{grid-template-columns:1fr}
-  .scorebar{width:100%}.score{flex:1;min-width:0;padding:7px 4px}.updated{display:none}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .card-top{padding:12px 6px 10px}
-  .team img,.team .team-logo-fallback{width:38px;height:38px}.team span{font-size:12px}
-  .badges{padding:7px 8px}.status,.category{font-size:10px;padding:3px 6px}
-  .card-body{padding:10px}.event-title{font-size:16px}.league{font-size:12px}.meta{font-size:11px}
-  .stream-count{font-size:11px;padding:5px 7px}
-  .section-head h2{font-size:26px}
-}
-@media(max-width:380px){.grid{grid-template-columns:1fr}}
-</style>
+<meta property="og:title" content="Webcric – Free Live Cricket Streaming Online">
+<meta property="og:description" content="Free live cricket streaming online on Webcric, in your browser with no app and no sign-up.">
+<meta property="og:image" content="https://webcric.is/cdn/images/og-default.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://webcric.is/">
+<meta name="twitter:card" content="summary_large_image">
+
 </head>
 <body>
-<div class="wrap">
-  <header class="topbar">
-    <div class="brand">NOWZY<span>PLAY</span></div>
-    <div class="scorebar">
-      <div class="score"><strong id="matchCount">—</strong><span>Matches</span></div>
-      <div class="score live"><strong id="liveCount">—</strong><span>Live</span></div>
-      <div class="score up"><strong id="upcomingCount">—</strong><span>Upcoming</span></div>
-      <div class="score ch" style="border-right:0"><strong id="streamCount">—</strong><span>Channels</span></div>
-    </div>
-    <div class="updated" id="updatedPill">● Connecting…</div>
-  </header>
+    <!-- Header Section -->
+    <header>
+        <button class="theme-toggle" type="button" aria-label="Switch between light and dark theme"><svg class="icon-moon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><svg class="icon-sun" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>        <div class="header-title"><img class="header-logo" src="/cdn/images/logo.png?id=1791544128" alt="Webcric" width="175" height="36"></div>
+        <p>Live cricket, right in your browser</p>
+    </header>
 
-  <!-- Inline Autoplay Video Player -->
-  <section class="player-stage" id="playerStage" aria-label="Live stream player">
-    <div class="player-head">
-      <div class="player-meta">
-        <span class="status live"><i class="dot"></i> LIVE</span>
-        <h2 class="player-title" id="playerTitle">Match Stream</h2>
-        <span class="player-channel" id="playerChannel">Channel</span>
-      </div>
-      <div class="player-actions">
-        <div class="source-pills" id="playerSources"></div>
-        <button class="close-player" id="closePlayer" type="button">✕ Close</button>
-      </div>
-    </div>
-    <div class="video-wrap">
-      <video id="videoPlayer" controls autoplay playsinline></video>
-      <div class="player-status" id="playerStatus"></div>
-    </div>
-  </section>
+    <!-- Main Content Wrapper -->
+    <main class="content-wrapper">
+        
+                <h1 class="home-heading">Free live cricket streaming in your browser, no app needed</h1>
+        <section class="lead">
+            <p class="lead-text">Open a match and it plays in the browser already on the laptop, phone or television.</p>
+            <ul class="lead-points" aria-label="Highlights">
+                <li>Free</li>
+                <li>No app needed</li>
+            </ul>
+        </section>
+        
+        <!-- Styled Match Selection Text -->
+        <div class="match-selection">
+            <h2>Pick a match</h2>
+        </div>
 
-  <div class="controls">
-    <div class="searchbox"><input id="search" type="search" placeholder="Search teams, leagues, channels…" autocomplete="off" aria-label="Search"></div>
-    <select id="sortFilter" aria-label="Sort events"><option value="default">Recommended order</option><option value="live">Live first</option><option value="name">Name A–Z</option></select>
-  </div>
+        <!-- Live Matches Boxes -->
+        <section class="matches" data-page-scrolls>
+                                                <a href="/live/india-vs-new-zealand-live-in-browser" class="match-box" tabindex="0">
+                        <h3>India vs New Zealand</h3>
+                        <span class="match-channel">Channel 1</span>
+                        <span class="watch-live">Watch</span>
+                    </a>
+                                    <a href="/live/australia-vs-england-live-in-browser" class="match-box" tabindex="0">
+                        <h3>Australia vs England</h3>
+                        <span class="match-channel">Channel 2</span>
+                        <span class="watch-live">Watch</span>
+                    </a>
+                                    <a href="/live/pakistan-vs-sri-lanka-live-in-browser" class="match-box" tabindex="0">
+                        <h3>Pakistan vs Sri Lanka</h3>
+                        <span class="match-channel">Channel 3</span>
+                        <span class="watch-live">Watch</span>
+                    </a>
+                                    <a href="/live/afghanistan-vs-zimbabwe-live-in-browser" class="match-box" tabindex="0">
+                        <h3>Afghanistan vs Zimbabwe 2026</h3>
+                        <span class="match-channel">Channel 4</span>
+                        <span class="watch-live">Watch</span>
+                    </a>
+                                    <a href="/live/south-africa-vs-bangladesh-live-in-browser" class="match-box" tabindex="0">
+                        <h3>South Africa vs Bangladesh</h3>
+                        <span class="match-channel">Channel 5</span>
+                        <span class="watch-live">Watch</span>
+                    </a>
+                                    <a href="/live/womens-big-bash-live-in-browser" class="match-box" tabindex="0">
+                        <h3>Women&#039;s Big Bash 2026</h3>
+                        <span class="match-channel">Channel 6</span>
+                        <span class="watch-live">Watch</span>
+                    </a>
+                                    <a href="/live/international-league-t20-live-in-browser" class="match-box" tabindex="0">
+                        <h3>International League T20 2026</h3>
+                        <span class="match-channel">Channel 7</span>
+                        <span class="watch-live">Watch</span>
+                    </a>
+                                    <a href="/live/asia-cup-rising-stars-live-in-browser" class="match-box" tabindex="0">
+                        <h3>Asia Cup Rising Stars 2026</h3>
+                        <span class="match-channel">Channel 8</span>
+                        <span class="watch-live">Watch</span>
+                    </a>
+                                    </section>
 
-  <nav class="chips" id="statusTabs" aria-label="Status filters">
-    <button class="chip status-tab active" data-status="ALL">All status</button>
-    <button class="chip status-tab" data-status="LIVE">Live</button>
-    <button class="chip status-tab" data-status="UPCOMING">Upcoming</button>
-    <button class="chip status-tab" data-status="ENDED">Ended</button>
-  </nav>
-  <nav class="chips" id="categoryTabs" aria-label="Sport categories"><button class="chip active" data-category="ALL">All sports</button></nav>
+        <section class="device-links">
+            <h2>Webcric on your phone or TV</h2>
+            <p>On a phone, the optional icon from Chrome or Safari opens Webcric without the address bar; on Android TV or Google TV, type code 565656 into Simple Downloader for the Webcric app.</p>
+            <div class="device-links-row">
+                <a href="/install-android-webapp" class="device-link for-android">Android phone</a>
+                <a href="/install-ios-app" class="device-link for-ios">iPhone / iPad</a>
+                <a href="/install-tv-app" class="device-link">Android TV</a>
+            </div>
+        </section>
 
-  <div class="section-head"><div><h2 id="sectionTitle">All matches</h2><p>Click a live match to load and autoplay its stream.</p></div><div class="results" id="resultCount">Loading events…</div></div>
-  <main class="grid" id="grid"><div class="loading"><strong>Loading the match centre…</strong>Fetching the latest sports data.</div></main>
-  <footer class="footer">NOWZYPLAY · LIVE SPORTS</footer>
-</div>
-<div class="toast" id="toast" role="status"></div>
+        <section class="about">
+            <h2>What Webcric is</h2>
+            <p class="about-lead">Webcric is a live cricket website that plays in the browser of a laptop, a phone or a television, with nothing to install; Android TV and Google TV can also have its app. Six channels a month, no account.</p>
+            <div class="about-grid">
+                <div class="about-item">
+                    <h3>Where it plays</h3>
+                    <p>Chrome, Safari, Firefox or Edge on a laptop or phone; the Internet app on a Samsung set, Web Browser on an LG, Silk on a Fire TV. Android TV and Google TV get Webcric's own app from a six-digit code; <a href="/install-tv-app">the TV page</a> has the steps.</p>
+                </div>
+                <div class="about-item">
+                    <h3>Which matches</h3>
+                    <p>The six channels on the front page, one per fixture for the month: international series and T20 leagues. Every match page gives dates, grounds and the published start times.</p>
+                </div>
+                <div class="about-item">
+                    <h3>A blank channel</h3>
+                    <p>The player is an embed from a third party; Webcric cannot tell whether a stream is on, and the box is black outside play. A channel blank during a match: email <a href="/cdn-cgi/l/email-protection#d5a2b0b7b6a7bcb695a5a7baa1babbb8b4bcb9fbb6bab8"><span class="__cf_email__" data-cfemail="2d5a484f4e5f444e6d5d5f42594243404c4441034e4240">[email&#160;protected]</span></a> and name the match.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <nav class="footer-nav">
+            <a href="/">Home</a>
+            <a href="/install-android-webapp">Android</a>
+            <a href="/install-ios-app">iPhone</a>
+            <a href="/install-tv-app">Android TV</a>
+            <a href="/cdn-cgi/l/email-protection#dcabb9bebfaeb5bf9cacaeb3a8b3b2b1bdb5b0f2bfb3b1">Contact</a>
+        </nav>
+        <p>&copy; 2026 Webcric &mdash; All rights reserved</p>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="/cdn/js/match-nav.js?id=1791544128"></script>
+    <script defer src="/cdn/js/theme.js?id=1791544128"></script>
+    <script defer src="/cdn/js/guard.js?id=1794998350"></script>
+
+<script>if ('standalone' in navigator && !navigator.standalone) { window.addEventListener('load', function () { setTimeout(function () { var s = document.createElement('script'); s.src = '/cdn/js/ios-pwa-splash.min.js?id=1791544128'; s.onload = function () { iosPWASplash('/cdn/images/icons/icon-512x512.png?id=1791544128', '#0f8a5f'); }; document.head.appendChild(s); }, 2000); }); }</script>
+
 
 <script>
-const DATA_URL = "https://raw.githubusercontent.com/sm-monirulislam/Upcoming-and-Live-Sports-Data/main/Sports_data.json";
-const PRIORITY_CATEGORY = "cricket";
-
-const $ = s => document.querySelector(s);
-const grid = $("#grid");
-const videoEl = $("#videoPlayer");
-const playerStage = $("#playerStage");
-const playerStatus = $("#playerStatus");
-
-let allMatches = [];
-let activeCategory = "ALL";
-let activeStatus = "ALL";
-let toastTimer;
-let shakaPlayer = null;
-
-const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function safeUrl(value){try{const u=new URL(value);return ["http:","https:"].includes(u.protocol)?u.href:""}catch{return ""}}
-function matchStatus(m){
-  const status=String(m.status||"").trim().toUpperCase();
-  if(status==="LIVE") return "LIVE";
-  if(status==="ENDED" || status==="FINISHED" || status==="COMPLETED") return "ENDED";
-  return "UPCOMING";
-}
-function isLive(m){return matchStatus(m)==="LIVE"}
-function isCricket(m){return String(m.Category||"").trim().toLowerCase()===PRIORITY_CATEGORY}
-function streamsOf(m){return Array.isArray(m.streams)?m.streams:[]}
-function validStreams(m){return streamsOf(m).filter(s=>safeUrl(s.stream_url))}
-function eventInfo(m){return m.eventInfo||{}}
-function eventName(m){const i=eventInfo(m);return i.eventName||m.event_name||"Sports event"}
-function teamA(m){const i=eventInfo(m);return i.teamA||String(m.event_name||"").split(/\s+Vs\s+/i)[0]||eventName(m)}
-function teamB(m){const i=eventInfo(m);return i.teamB||String(m.event_name||"").split(/\s+Vs\s+/i)[1]||""}
-
-function teamLogoHtml(primary, fallback, teamName){
-  const teamUrl = safeUrl(primary);
-  const eventUrl = safeUrl(fallback);
-  const initials = String(teamName || "?").trim().split(/\s+/).filter(Boolean).slice(0, 2).map(x => x[0]).join("").toUpperCase() || "?";
-  const fallbackHtml = `<span class="team-logo-fallback" aria-hidden="true">${esc(initials)}</span>`;
-  if (!teamUrl && !eventUrl) return fallbackHtml.replace('class="team-logo-fallback"', 'class="team-logo-fallback" style="display:flex"');
-  const first = teamUrl || eventUrl;
-  const second = teamUrl && eventUrl && teamUrl !== eventUrl ? eventUrl : "";
-  return `<img src="${esc(first)}" alt="${esc(teamName)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-fallback="${esc(second)}" onerror="if(this.dataset.fallback){const next=this.dataset.fallback;this.dataset.fallback='';this.src=next}else{this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='flex'}">${fallbackHtml}`;
-}
-
-function showToast(message){
-  const t=$("#toast");
-  t.textContent=message;
-  t.style.display="block";
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.style.display="none",2800);
-}
-
-function setPlayerOverlay(text){
-  if(!text){
-    playerStatus.classList.remove("visible");
-    playerStatus.innerHTML = "";
-    return;
-  }
-  playerStatus.innerHTML = text;
-  playerStatus.classList.add("visible");
-}
-
-/* ================= INLINE PLAYER ENGINE ================= */
-async function initShaka(){
-  if(shakaPlayer) return shakaPlayer;
-  if(window.shaka){
-    shaka.polyfill.installAll();
-    if(shaka.Player.isBrowserSupported()){
-      shakaPlayer = new shaka.Player();
-      await shakaPlayer.attach(videoEl);
-      shakaPlayer.addEventListener("error", e => {
-        console.error("Shaka error:", e.detail);
-        setPlayerOverlay(`<strong>Stream playback error</strong><span>Try switching to another source button above.</span>`);
-      });
-    }
-  }
-  return shakaPlayer;
-}
-
-async function playStream(match, sources, sourceIndex = 0){
-  const stream = sources[sourceIndex];
-  if(!stream) return;
-
-  playerStage.classList.add("active");
-  $("#playerTitle").textContent = match.event_name || eventName(match);
-  $("#playerChannel").textContent = (stream.channel_name || `Source ${sourceIndex + 1}`).trim();
-
-  const pillBox = $("#playerSources");
-  pillBox.innerHTML = sources.map((s, idx) =>
-    `<button type="button" class="source-pill ${idx === sourceIndex ? "active" : ""}" data-src-idx="${idx}">${esc((s.channel_name || `Source ${idx + 1}`).trim())}</button>`
-  ).join("");
-  pillBox.querySelectorAll("[data-src-idx]").forEach(btn => {
-    btn.addEventListener("click", () => playStream(match, sources, Number(btn.dataset.srcIdx)));
-  });
-
-  playerStage.scrollIntoView({ behavior: "smooth", block: "start" });
-  setPlayerOverlay("<strong>Loading stream…</strong>");
-
-  try {
-    const player = await initShaka();
-    if(player){
-      await player.unload();
-      await player.load(stream.stream_url);
-    } else {
-      videoEl.src = stream.stream_url;
-    }
-
-    setPlayerOverlay("");
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", async () => {
     try {
-      await videoEl.play();
-    } catch (autoplayErr) {
-      videoEl.muted = true;
-      await videoEl.play();
-      showToast("Muted for autoplay — click the volume icon to unmute.");
+      await navigator.serviceWorker.register("/service-worker.js");
+      
+    } catch (error) {
+      console.error("Service Worker registration failed:", error);
     }
-  } catch (err) {
-    console.error("Playback failed:", err);
-    setPlayerOverlay(`<strong>Could not load this stream</strong><span>Select another source from the top bar if available.</span>`);
-  }
-}
-
-async function closePlayer(){
-  if(shakaPlayer) await shakaPlayer.unload();
-  videoEl.pause();
-  videoEl.removeAttribute("src");
-  videoEl.load();
-  playerStage.classList.remove("active");
-}
-$("#closePlayer").addEventListener("click", closePlayer);
-
-/* ================= MATCH CARDS & FILTERING ================= */
-function timeText(m){const i=eventInfo(m);return i.startTime||"Time not listed"}
-
-function cardHtml(m,index){
-  const i=eventInfo(m), status=matchStatus(m), live=status==="LIVE", streams=live?validStreams(m):[];
-  const a=teamA(m), b=teamB(m), logo=safeUrl(i.event_logo), flagA=safeUrl(i.teamAFlag), flagB=safeUrl(i.teamBFlag);
-  const cat=m.Category||"Other";
-  const disabled=!live||!streams.length;
-  const none=!live||!streams.length;
-  const sourceLabel=live
-    ? (streams.length ? `<strong>${streams.length}</strong> available source${streams.length===1?"":"s"}` : "No source available")
-    : status;
-  const statusLabel=live?'<i class="dot"></i> LIVE':status;
-  return `<article class="card ${live?"live-match":"non-live"} ${isCricket(m)?"cricket-card":""}" ${live?'':'aria-disabled="true"'}>
-    <div class="card-top">
-      <div class="team">${teamLogoHtml(flagA,logo,a)}<span title="${esc(a)}">${esc(a)}</span></div>
-      <div class="versus">VS</div>
-      <div class="team">${teamLogoHtml(flagB,logo,b)}<span title="${esc(b)}">${esc(b)}</span></div>
-    </div>
-    <div class="badges"><span class="status ${status.toLowerCase()}">${statusLabel}</span><span class="category">${esc(cat)}</span></div>
-    <div class="card-body">
-      <h3 class="event-title">${esc(m.event_name||eventName(m))}</h3>
-      <div class="league">${esc(eventName(m))}</div>
-      <div class="meta">◷ ${esc(timeText(m))}</div>
-      <div class="stream-row"><div class="stream-count ${none?"none":""}">${sourceLabel}</div>
-      <button class="watch" data-open="${index}" ${disabled?"disabled":""}>WATCH</button></div>
-    </div>
-  </article>`;
-}
-
-function getFiltered(){
-  const q=$("#search").value.trim().toLowerCase();
-  let rows=allMatches.map((m,index)=>({m,index})).filter(({m})=>{
-    const statusMatches=activeStatus==="ALL"||activeStatus===matchStatus(m);
-    const matchCat=activeCategory==="ALL"||(m.Category||"Other")===activeCategory;
-    const text=[m.event_name,eventName(m),teamA(m),teamB(m),m.Category,...streamsOf(m).map(s=>s.channel_name)].join(" ").toLowerCase();
-    return statusMatches&&matchCat&&text.includes(q);
   });
-  const sort=$("#sortFilter").value;
-  if(sort==="live") rows.sort((a,b)=>Number(isLive(b.m))-Number(isLive(a.m)));
-  if(sort==="name") rows.sort((a,b)=>String(a.m.event_name||"").localeCompare(String(b.m.event_name||"")));
-  return rows;
 }
-
-function openMatch(match){
-  if(!match || !isLive(match)) return;
-  const sources=validStreams(match);
-  if(!sources.length) return;
-  if(sources.length===1){
-    playStream(match, sources, 0);
-    return;
-  }
-  showStreamPicker(match, sources);
-}
-
-function render(){
-  const rows=getFiltered();
-  $("#sectionTitle").textContent=(activeStatus==="LIVE"?"Live now":activeStatus==="UPCOMING"?"Upcoming matches":activeStatus==="ENDED"?"Ended matches":"All matches")+(activeCategory==="ALL"?"":" · "+activeCategory);
-  document.querySelectorAll(".status-tab").forEach(b=>b.classList.toggle("active",b.dataset.status===activeStatus));
-  $("#resultCount").textContent=`${rows.length} event${rows.length===1?"":"s"}`;
-  if(!rows.length){grid.innerHTML='<div class="empty"><strong>No matches found</strong>Try another search or select a different sport or status.</div>';return}
-  const cricket=rows.filter(r=>isCricket(r.m)), rest=rows.filter(r=>!isCricket(r.m));
-  let html="";
-  if(activeCategory==="ALL" && cricket.length && rest.length){
-    html+=`<div class="group"><h3>Cricket</h3><small>${cricket.length} event${cricket.length===1?"":"s"}</small></div>`+cricket.map(({m,index})=>cardHtml(m,index)).join("");
-    html+=`<div class="group rest"><h3>Other sports</h3><small>${rest.length} event${rest.length===1?"":"s"}</small></div>`+rest.map(({m,index})=>cardHtml(m,index)).join("");
-  } else {
-    html=[...cricket,...rest].map(({m,index})=>cardHtml(m,index)).join("");
-  }
-  grid.innerHTML=html;
-  grid.querySelectorAll(".group,.card").forEach((el,i)=>el.style.setProperty("--i",Math.min(i,14)));
-  grid.querySelectorAll(".card").forEach(card=>card.addEventListener("click",()=>{
-    const btn=card.querySelector("[data-open]");
-    openMatch(allMatches[Number(btn.dataset.open)]);
-  }));
-}
-
-function showStreamPicker(match,sources){
-  const overlay=document.createElement("div");
-  overlay.style.cssText="position:fixed;inset:0;z-index:50;background:#030d0bd9;backdrop-filter:blur(10px);display:grid;place-items:center;padding:18px";
-  const panel=document.createElement("section");
-  panel.style.cssText="width:min(560px,100%);max-height:85vh;overflow:auto;background:#12342b;border:1px solid #24513f;border-radius:16px;padding:22px;box-shadow:0 30px 100px #0009;color:#f3efe2";
-  const title=document.createElement("h2");title.textContent=match.event_name||eventName(match);title.style.cssText="font-size:26px;margin:0 0 4px";
-  const sub=document.createElement("p");sub.textContent="Select a stream source to autoplay.";sub.style.cssText="color:#9fb8aa;font-size:14px;margin:0 0 14px";
-  const close=document.createElement("button");close.textContent="✕";close.setAttribute("aria-label","Close");close.style.cssText="float:right;background:#ffffff12;color:white;border:1px solid #ffffff1c;border-radius:9px;padding:7px 10px";
-  close.onclick=()=>overlay.remove();
-  panel.append(close,title,sub);
-  sources.forEach((s,i)=>{
-    const b=document.createElement("button");
-    const isDash=/\.mpd(?:$|\?)/i.test(s.stream_url);
-    b.textContent=(s.channel_name||`Source ${i+1}`).trim()+`  ·  ${isDash?"DASH":"HLS"}`;
-    b.style.cssText="display:block;width:100%;text-align:left;margin:8px 0;padding:14px;border:1px solid #24513f;border-radius:10px;background:#163d32;color:#f3efe2;font-weight:600;cursor:pointer";
-    b.onmouseenter=()=>b.style.borderColor="#e8b44a";b.onmouseleave=()=>b.style.borderColor="#24513f";
-    b.onclick=()=>{
-      overlay.remove();
-      playStream(match, sources, i);
-    };
-    panel.appendChild(b);
-  });
-  overlay.addEventListener("click",e=>{if(e.target===overlay)overlay.remove()});
-  overlay.appendChild(panel);document.body.appendChild(overlay);
-}
-
-function renderCategories(){
-  const cats=[...new Set(allMatches.map(m=>m.Category||"Other"))].sort((a,b)=>{
-    const ca=a.toLowerCase()===PRIORITY_CATEGORY, cb=b.toLowerCase()===PRIORITY_CATEGORY;
-    return ca!==cb ? (ca?-1:1) : a.localeCompare(b);
-  });
-  const allBtn=`<button class="chip ${activeCategory==="ALL"?"active":""}" data-category="ALL">All sports</button>`;
-  const catBtns=cats.map(c=>`<button class="chip ${c.toLowerCase()===PRIORITY_CATEGORY?"cricket":""} ${activeCategory===c?"active":""}" data-category="${esc(c)}">${esc(c)}</button>`).join("");
-  const box=$("#categoryTabs");
-  box.innerHTML=allBtn+catBtns;
-  box.querySelectorAll("[data-category]").forEach(b=>b.addEventListener("click",()=>{
-    activeCategory=b.dataset.category;
-    renderCategories();render();
-  }));
-}
-
-async function loadData(){
-  try{
-    const response=await fetch(DATA_URL,{cache:"no-store"});
-    if(!response.ok)throw new Error("Source returned HTTP "+response.status);
-    const data=await response.json();
-    allMatches=Array.isArray(data)?data:(Array.isArray(data.matches)?data.matches:[]);
-    const live=allMatches.filter(isLive).length;
-    const feeds=allMatches.reduce((n,m)=>n+validStreams(m).length,0);
-    $("#liveCount").textContent=Number.isFinite(data.live_match)?data.live_match:live;
-    $("#matchCount").textContent=Number.isFinite(data.total_matches)?data.total_matches:allMatches.length;
-    $("#streamCount").textContent=feeds.toLocaleString();
-    $("#upcomingCount").textContent=allMatches.filter(m=>String(m.status||"").toUpperCase()==="UPCOMING").length;
-    $("#updatedPill").textContent=data.last_update_time?("● Updated "+data.last_update_time):"● Data loaded";
-    renderCategories();render();
-  }catch(err){
-    grid.innerHTML=`<div class="error"><strong>Could not load sports data</strong><p>${esc(err.message||"Unknown error")}</p><button class="watch" onclick="loadData()">Try again</button></div>`;
-    $("#updatedPill").textContent="● Connection error";$("#resultCount").textContent="Data unavailable";
-  }
-}
-
-$("#search").addEventListener("input",render);
-document.querySelectorAll(".status-tab").forEach(button=>button.addEventListener("click",()=>{
-  activeStatus=button.dataset.status;
-  render();
-}));
-$("#sortFilter").addEventListener("change",render);
-loadData();
 </script>
+
+
+<script data-cfasync="false" src="https://capitalhospitals.org/1/ec029c61259dc6b205c80bba2db08326"></script>
+<script data-cfasync="false" async type="text/javascript" src="//rt.ambaristipmost.com/sgbqBUtrQUK5/127273"></script>
 </body>
 </html>
